@@ -1,3 +1,3 @@
 # ibramenu
 
-![IBRAMENU Logo](/main/ibramenu_concept.png?raw=true "IBRAMENU")
+![IBRAMENU Logo](/ibramenu_concept.png?raw=true "IBRAMENU")
