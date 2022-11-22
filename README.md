@@ -11,4 +11,4 @@ https://ibramenu.io
 **Want to get involved early?** <br>
 https://ibramenu.io/store/
 
-![IBRAMENU Logo](/ibramenu_concept.png?raw=true "IBRAMENU")
+![IBRAMENU Logo](/ibramenu-logo.png?raw=true "IBRAMENU")
