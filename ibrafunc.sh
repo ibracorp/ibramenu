@@ -55,3 +55,22 @@ msgbox () {
   echo $box_outline_hor
   echo
 }
+
+# ibracorp logo
+ibralogo () {
+  version=$(cat "/opt/ibracorp/ibramenu/version")
+  tput clear
+  tput bold
+  tput setaf 1
+  tee <<-EOF
+  ___ ____  ____      _    ____ ___  ____  ____  ™ 
+ |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \  
+  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) | 
+  | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  
+ |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     RC2 Version $version
+                                                 
+$(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
+Become a Member and sponsor us: https://ibracorp.io/memberships
+EOF
+  tput sgr0
+}
