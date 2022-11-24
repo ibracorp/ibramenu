@@ -19,3 +19,24 @@ apt update
 apt install git -y
 git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
 find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+
+# Add ibramenu as systemwide alias
+if ! grep -q ibramenu /etc/bash.bashrc
+then
+  insert_alias="alias ibramenu='sudo /opt/ibracorp/ibramenu/ibramenu.sh'"
+  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+  source /etc/bash.bashrc
+fi
+# Add ibraupdate as systemwide alias
+if ! grep -q ibraupdate /etc/bash.bashrc
+then
+  insert_alias="alias ibraupdate='sudo /opt/ibracorp/ibrainstall.sh'"
+  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+  source /etc/bash.bashrc
+fi
+
+# Include ibrafunc for all the awesome functions
+source /opt/ibracorp/ibramenu/ibrafunc.sh
+ibralogo
+msgbox "Type 'ibramenu' to launch the IBRAMENU"
+msgbox "Type 'ibraupdate' to update"
