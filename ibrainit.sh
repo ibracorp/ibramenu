@@ -73,7 +73,7 @@ EOF
 
   distribution="$dist $release"
   case $distribution in
-    "Ubuntu 20.04" | "Ubuntu 22.04")
+    "Ubuntu 18.04" | "Ubuntu 20.04" | "Ubuntu 22.04")
       echo "$distribution has been tested and works"
       ;;
     *)
