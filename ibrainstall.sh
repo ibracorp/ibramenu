@@ -38,5 +38,6 @@ fi
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 ibralogo
-msgbox "Type 'ibramenu' to launch the IBRAMENU"
+msgbox "Type 'ibramenu' to launch IBRAMENU"
 msgbox "Type 'ibraupdate' to update"
+msgbox "Please reboot after the first installation"
