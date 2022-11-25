@@ -75,6 +75,17 @@ EOF
   case $distribution in
     "Ubuntu 18.04" | "Ubuntu 20.04" | "Ubuntu 22.04" | "Ubuntu 22.10")
       echo "$distribution has been tested and works"
+      echo
+      sleep 3
+      ;;
+    "Debian GNU/Linux 10")
+      echo "$distribution is considered experimental but will mostly work"
+      echo "You will be asked if you want to switch the debian repositories from 'stable' to 'oldstable'. More info can be found here: https://wiki.debian.org/DebianOldStable"
+      read -p "Press Enter to continue"
+      ;;
+    "Debian GNU/Linux 11")
+      echo "$distribution is considered experimental but will mostly work"
+      read -p "Press Enter to continue"
       ;;
     *)
       read -p "$distribution has not been tested, would you like to continue? (y/n) " accept
