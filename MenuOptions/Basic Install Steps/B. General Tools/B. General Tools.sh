@@ -27,6 +27,8 @@ install_tools () {
    apt install tmux -y
    # zsh
    apt install zsh -y
+   # midnight commander
+   apt install mc -y
 }
 
 install_tools
