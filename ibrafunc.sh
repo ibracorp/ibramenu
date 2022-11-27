@@ -165,6 +165,16 @@ readme () {
   fi
 }
 
+# check if ibramenu is up-to-date
+checkupdate () {
+  version=$(cat "/opt/ibracorp/ibramenu/version")
+  current=$(curl -s https://raw.githubusercontent.com/ibracorp/ibramenu/main/version)
+  if [ ! $version = $current ]
+  then
+    msgbox "You IBRAMENU is not up-to-date. Use 'ibraupdate' to update."
+  fi
+}
+
 # IBRACORP motd
 ibramotd () {
   chmod -x /etc/update-motd.d/*
