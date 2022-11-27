@@ -103,8 +103,6 @@ EOF
 
 # Launch IBRAINSTALL
 install () {
-  apt update
-  apt install sudo
   mkdir -p /opt/ibracorp
   wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
   chmod +x /opt/ibracorp/ibrainstall.sh
