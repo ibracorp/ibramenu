@@ -38,6 +38,7 @@ fi
 
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
+ibramotd
 ibralogo
 msgbox "Type 'ibramenu' to launch IBRAMENU"
 msgbox "Type 'ibraupdate' to update"
