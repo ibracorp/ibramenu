@@ -16,7 +16,7 @@ mkdir -p $ifolder
 
 # Clone ibramenu
 apt update
-apt install git -y
+apt install sudo curl git -y
 git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
 find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 cp /opt/ibracorp/ibramenu/ibrainstall.sh /opt/ibracorp/ibrainstall.sh
