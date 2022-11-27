@@ -67,7 +67,7 @@ ibralogo () {
  |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \  
   | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) | 
   | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  
- |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     RC2 Version $version
+ |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     Version $version
                                                  
 $(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
 Become a Member and sponsor us: https://ibracorp.io/memberships
