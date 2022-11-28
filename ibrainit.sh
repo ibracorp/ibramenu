@@ -110,6 +110,9 @@ install () {
 }
 
 # Execute
-disclaimer
+if [ -z $1 ]
+then
+  disclaimer
+fi
 checklist
 install
