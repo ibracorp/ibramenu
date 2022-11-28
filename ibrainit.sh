@@ -115,4 +115,4 @@ then
   disclaimer
 fi
 checklist
-install
+install $1
