@@ -44,7 +44,8 @@ if [[ -n $1 ]]
 then
   if [ $1 = all ]
   then
-    "/opt/ibracorp/ibramenu/MenuOptions/Submenu Basic Install Steps/All Steps in One/All Steps in One.sh"
+    cd "/opt/ibracorp/ibramenu/MenuOptions/Submenu Basic Install Steps/All Steps in One"
+    "./All Steps in One.sh"
     reboot
   else
     msgbox "Type 'ibramenu' to launch IBRAMENU"
