@@ -11,7 +11,7 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 ibralogo
 msgbox "System Power Down"
-read -p "Are you sure? " -n 1 -r
+read -p "Are you sure (y/N)? " -n 1 -r
 echo    
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
