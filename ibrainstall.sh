@@ -40,6 +40,15 @@ fi
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 ibramotd
 ibralogo
-msgbox "Type 'ibramenu' to launch IBRAMENU"
-msgbox "Type 'ibraupdate' to update"
-msgbox "Please reboot after the first installation"
+if [[ -n $1 ]]
+then
+  if [ $1 = all ]
+  then
+    "/opt/ibramenu/MenuOptions/Submenu Basic Install Steps/All Steps in One/All Steps in One.sh"
+    reboot
+  else
+    msgbox "Type 'ibramenu' to launch IBRAMENU"
+    msgbox "Type 'ibraupdate' to update"
+    msgbox "Please reboot after the first installation"
+  fi
+fi

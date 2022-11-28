@@ -106,7 +106,7 @@ install () {
   mkdir -p /opt/ibracorp
   wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
   chmod +x /opt/ibracorp/ibrainstall.sh
-  /opt/ibracorp/ibrainstall.sh
+  /opt/ibracorp/ibrainstall.sh $1
 }
 
 # Execute
