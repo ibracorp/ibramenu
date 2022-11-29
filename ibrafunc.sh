@@ -199,3 +199,59 @@ EOF
   echo "EOF" >> /etc/update-motd.d/01-ibracorp
   chmod +x /etc/update-motd.d/01-ibracorp
 }
+
+# App Greetings
+appgreetings () {
+  ibralogo
+  msgbox "$title Installer"
+}
+
+# App
+appcreate () {
+  msgbox "Installing $title..."
+  mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
+  tee <<-EOF > .env
+APP_NAME=$app
+IMAGE=$image
+TP_APP=$tp_app
+PORTE=$porte
+PORTI=$porti
+EOF
+  tee <<-EOF > compose.yaml
+services:
+  service-name:
+    image: \${IMAGE:?err}
+    container_name: \${APP_NAME:?err}
+    env_file:
+      - /opt/appdata/.id.env
+      - /opt/appdata/.timezone.env
+      - /opt/appdata/.themepark.env
+    volumes:
+      - /opt/appdata/\${APP_NAME:?err}:/config
+      - /mnt/media:/media
+    ports:
+      - \${PORTE:?err}:\${PORTI:?err}
+    restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
+$extrapayload
+EOF
+  docker compose up -d --force-recreate
+}
+
+# List Links
+appfinalization () {
+  ibralogo
+  msgbox "All Done! Here is the link to $title:"
+  echo
+  ip=$(hostname -I | awk '{print $1}')
+  echo "$title: http://$ip:$porte/"
+  echo
+}
+
+# App Complete
+app () {
+  appgreetings
+  appcreate
+  appfinalization
+}
