@@ -226,9 +226,12 @@ services:
       - /opt/appdata/.id.env
       - /opt/appdata/.timezone.env
       - /opt/appdata/.themepark.env
-    volumes:
-      - /opt/appdata/\${APP_NAME:?err}:/config
-      - /mnt/media:/media
+EOF
+  if [ ! -z "$volumes" ]
+  then
+    echo "$volumes" >> compose.yaml
+  fi
+  tee <<-EOF >> compose.yaml
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
     restart: unless-stopped

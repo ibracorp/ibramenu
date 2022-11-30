@@ -10,13 +10,16 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # App Info
-app="sonarr"                               # App Name
-title="Sonarr"                             # Readable App Title
-image="lscr.io/linuxserver/sonarr:latest"  # Image and Tag
-tp_app="sonarr"                            # Theme Park App Name
-porte="8989"                               # External Port
-porti="8989"                               # Internal Port
-extrapayload=""                            # Extra Payload to add to the Compose
+app="sonarr"                                   # App Name
+title="Sonarr"                                 # Readable App Title
+image="lscr.io/linuxserver/sonarr:latest"      # Image and Tag
+volumes="    volumes:
+      - /opt/appdata/\${APP_NAME:?err}:/config
+      - /mnt/media:/media"                     # Volumes
+tp_app="sonarr"                                # Theme Park App Name
+porte="8989"                                   # External Port
+porti="8989"                                   # Internal Port
+extrapayload=""                                # Extra Payload to add to the Compose
 
 # Execute
 app
