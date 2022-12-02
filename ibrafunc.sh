@@ -225,8 +225,11 @@ services:
     env_file:
       - /opt/appdata/.id.env
       - /opt/appdata/.timezone.env
-      - /opt/appdata/.themepark.env
 EOF
+  if [ ! -z "$tp_app" ]
+  then
+    echo "      - /opt/appdata/.themepark.env" >> compose.yaml
+  fi
   if [ ! -z "$volumes" ]
   then
     echo "$volumes" >> compose.yaml
@@ -240,16 +243,6 @@ EOF
 $extrapayload
 EOF
   docker compose up -d --force-recreate
-}
-
-# List Links
-appfinalization () {
-  ibralogo
-  msgbox "All Done! Here is the link to $title:"
-  echo
-  ip=$(hostname -I | awk '{print $1}')
-  echo "$title: http://$ip:$porte/"
-  echo
 }
 
 # App Complete
