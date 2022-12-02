@@ -19,7 +19,9 @@ volumes="    volumes:
 tp_app=""                                       # Theme Park App Name
 porte="8443"                                    # External Port
 porti="8443"                                    # Internal Port
-extrapayload=""                                 # Extra Payload to add to the Compose
+extrapayload="    environment:
+      - PUID=0
+      - PGID=0"                                 # Extra Payload to add to the Compose
 
 # Execute
 app
