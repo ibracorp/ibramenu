@@ -129,8 +129,8 @@ environment_check () {
   # PUID and PGID
   if [ ! -f "/opt/appdata/.id.env" ]
   then
-    echo "PUID=0" > "/opt/appdata/.id.env"
-    echo "PGID=0" >> "/opt/appdata/.id.env"
+    echo "PUID=1000" > "/opt/appdata/.id.env"
+    echo "PGID=1000" >> "/opt/appdata/.id.env"
   fi
   # theme.park
   if [ ! -f "/opt/appdata/.themepark.env" ]
