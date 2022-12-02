@@ -245,6 +245,16 @@ EOF
   docker compose up -d --force-recreate
 }
 
+# List Links
+appfinalization () {
+  ibralogo
+  msgbox "All Done! Here is the link to $title:"
+  echo
+  ip=$(hostname -I | awk '{print $1}')
+  echo "$title: http://$ip:$porte/"
+  echo
+}
+
 # App Complete
 app () {
   appgreetings
