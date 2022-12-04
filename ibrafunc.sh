@@ -237,10 +237,16 @@ EOF
   tee <<-EOF >> compose.yaml
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
+    networks:
+      - ibranet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 $extrapayload
+networks:
+  ibranet:
+    driver: bridge
+    external: true
 EOF
   docker compose up -d --force-recreate
 }
