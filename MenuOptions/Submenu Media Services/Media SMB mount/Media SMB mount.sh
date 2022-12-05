@@ -56,7 +56,7 @@ EOF
   mkdir -p /mnt/media
   tee <<-EOF > /etc/fstab
 #media
-//$storage_server/$fstorage_share /mnt/media       cifs    noperm,iocharset=utf8,rw,credentials=/root/.storage_credentials,uid=root,gid=root,file_mode=0660,dir_mode=0770 0       0
+//$storage_server/$fstorage_share /mnt/media       cifs    noperm,iocharset=utf8,rw,credentials=/root/.storage_credentials,uid=1000,gid=1000,file_mode=0660,dir_mode=0770 0       0
 EOF
   mount -a
 }
