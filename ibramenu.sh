@@ -72,7 +72,12 @@ execute_script () {
 }
 
 # Define Variables
-menu_entry_point="/opt/ibracorp/ibramenu/MenuOptions/"
+if [ $1 ]
+then
+  menu_entry_point="$1"
+else
+  menu_entry_point="/opt/ibracorp/ibramenu/MenuOptions/"
+fi
 cd "$menu_entry_point"
 
 # Check Disclaimer
