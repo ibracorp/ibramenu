@@ -116,6 +116,7 @@ then
 fi
 if [ -n $2 ]
 then
+  mkdir -p /opt/ibracorp
   echo $2 > /opt/ibracorp/token
 fi
 checklist
