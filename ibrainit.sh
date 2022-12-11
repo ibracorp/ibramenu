@@ -114,5 +114,9 @@ if [ -z $1 ]
 then
   disclaimer
 fi
+if [ -n $2 ]
+then
+  echo $2 > /opt/ibracorp/token
+fi
 checklist
 install $1
