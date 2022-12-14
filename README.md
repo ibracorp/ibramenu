@@ -1,3 +1,5 @@
+<a href="url"><img src="/ibramenu-logo.png" align="left" height="500" width="500" ></a>
+
 IBRAMENU
 ========
 [![Discord](https://img.shields.io/discord/595508571135803403?label=Discord&logo=Discord&style=plastic)](https://i.ibracorp.io/discord)
@@ -5,10 +7,17 @@ IBRAMENU
 [![Feedback](https://img.shields.io/badge/IBRAMENU-Feedback-brightgreen?style=plastic)](https://feedback.ibracorp.io/ibramenu)
 [![Ubuntu](https://img.shields.io/badge/Works%20best%20with-Ubuntu-E95420?style=plastic&logo=ubuntu&logoColor=white)](https://ubuntu.com)
 
+This README is a work in progress and awaiting other tasks before being completed. 
+The actual documentation page below has all the information to help you get started with IBRAMENU.
+
 **HOW TO INSTALL** <br>
 https://docs.ibracorp.io/ibramenu
 
 **Want to Support Us and Get Perks?** <br>
 https://ibramenu.io/store/
 
-![IBRAMENU Logo](/ibramenu-logo.png?raw=true "IBRAMENU")
+**Join us on Discord!**
+https://discord.gg/VWAG7rZ
+
+
+
