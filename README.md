@@ -12,6 +12,7 @@ The actual documentation page below has all the information to help you get star
 
 **HOW TO INSTALL** <br>
 https://docs.ibracorp.io/ibramenu
+<a href="https://docs.ibracorp.io/ibramenu" target="_blank">Go</a>
 
 **Want to Support Us and Get Perks?** <br>
 https://ibramenu.io/store/
