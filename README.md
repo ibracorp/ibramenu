@@ -16,8 +16,8 @@ https://docs.ibracorp.io/ibramenu
 **Want to Support Us and Get Perks?** <br>
 https://ibramenu.io/store/
 
-**Join us on Discord!**
-https://discord.gg/VWAG7rZ
+**Join us on Discord** <br>
+[![Discord](https://img.shields.io/discord/595508571135803403?label=Discord&logo=Discord&style=plastic)](https://i.ibracorp.io/discord)
 
 
 
