@@ -253,11 +253,15 @@ EOF
 
 # List Links
 appfinalization () {
+  check_ibradashy
   ibralogo
   msgbox "All Done! Here is the link to $title:"
   echo
   ip=$(hostname -I | awk '{print $1}')
   echo "$title: http://$ip:$porte/"
+  ibradashy
+  msgbox "You can also find $title on your IBRACORP Dashy website:"
+  echo "http://$ip:8086"
   echo
 }
 
@@ -266,4 +270,88 @@ app () {
   appgreetings
   appcreate
   appfinalization
+}
+
+# IBRACORP Dashy
+ibradashy () {
+#  if [ -n $(cat "/opt/appdata/ibradashy/conf.yml" | grep "^      - title: $title$") ]
+  if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" > /dev/null 2>&1
+  then
+    position=$(expr $(grep -n "IBRAMENU added" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 1 )
+    sed -i "$position i \      - title: $title\\
+        description: Click to launch $title\\
+        icon: favicon\\
+        url: http://$ip:$porte" /opt/appdata/ibradashy/conf.yml
+    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
+  fi
+}
+
+# Check IBRACORP Dashy
+check_ibradashy () {
+  if [ ! -d "/opt/appdata/ibradashy" ]
+  then
+    mkdir -p "/opt/appdata/ibradashy"
+  fi
+  if [ ! -f "/opt/appdata/ibradashy/.env" ]
+  then
+    tee <<-EOF > "/opt/appdata/ibradashy/.env"
+APP_NAME=ibradashy
+IMAGE=lissy93/dashy:latest
+TP_APP=
+PORTE=8086
+PORTI=80
+EOF
+  fi
+  if [ ! -f "/opt/appdata/ibradashy/conf.yml" ]
+  then
+    tee <<-EOF > "/opt/appdata/ibradashy/conf.yml"
+pageInfo:
+  title: IBRACORP
+sections:
+  - name: IBRAMENU
+    icon: far fa-rocket
+    items:
+# IBRAMENU added
+appConfig:
+  theme: default
+  language: en
+  layout: auto
+  iconSize: medium
+  customColors:
+    default:
+      primary: '#e84b3c'
+      background: '#0b1021'
+      background-darker: '#05070e'
+EOF
+  fi
+  if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]
+  then
+    tee <<-EOF > "/opt/appdata/ibradashy/compose.yaml"
+services:
+  service-name:
+    image: \${IMAGE:?err}
+    container_name: \${APP_NAME:?err}
+    env_file:
+      - /opt/appdata/.id.env
+      - /opt/appdata/.timezone.env
+    volumes:
+      - ./conf.yml:/app/public/conf.yml
+    ports:
+      - \${PORTE:?err}:\${PORTI:?err}
+    networks:
+      - ibranet
+    restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
+
+networks:
+  ibranet:
+    driver: bridge
+    external: true
+EOF
+  fi
+if [ ! $(docker ps | grep ibradashy) ]
+then
+  docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
+fi
 }
