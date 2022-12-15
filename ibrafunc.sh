@@ -353,6 +353,7 @@ EOF
   fi
 if [ ! $(docker ps | grep ibradashy) ]
 then
+  msgbox "Installing/Updating IBRADASHY"
   docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
 fi
 }
