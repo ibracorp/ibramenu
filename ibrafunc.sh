@@ -318,6 +318,34 @@ sections:
       cols: 1
       collapsed: false
       hideForGuests: false
+  - name: Information
+    displayData:
+      sortBy: alphabetical
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    widgets:
+      - type: image
+        options:
+          imagePath: https://ibramenu.io/wp-content/uploads/2022/08/ibramenu_concept._logo_crop-300x140.png
+    items:
+      - title: IBRAMENU
+        description: Website
+        icon: https://ibracorp.io/favicon.ico
+        url: https://ibramenu.io
+      - title: IBRACORP
+        description: Main Website
+        icon: favicon
+        url: https://ibracorp.io
+      - title: GitHub
+        description: IBRAMENU on GitHub
+        icon: favicon
+        url: https://github.com/ibracorp/ibramenu
+      - title: Feedback
+        description: IBRAMENU Feedback and Voting
+        icon: https://ibracorp.io/favicon.ico
+        url: https://feedback.ibracorp.io/ibramenu
 appConfig:
   theme: Oblivion
   language: en
