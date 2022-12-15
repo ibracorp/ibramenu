@@ -319,15 +319,10 @@ sections:
       collapsed: false
       hideForGuests: false
 appConfig:
-  theme: default
+  theme: Oblivion
   language: en
   layout: auto
   iconSize: large
-  customColors:
-    default:
-      primary: '#e84b3c'
-      background: '#262a2b'
-      background-darker: '#1f2223'
 EOF
   fi
   if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]
