@@ -312,16 +312,22 @@ sections:
     icon: far fa-rocket
     items:
 # IBRAMENU added
+    displayData:
+      sortBy: alphabetical
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
 appConfig:
   theme: default
   language: en
   layout: auto
-  iconSize: medium
+  iconSize: large
   customColors:
     default:
       primary: '#e84b3c'
-      background: '#0b1021'
-      background-darker: '#05070e'
+      background: '#262a2b'
+      background-darker: '#1f2223'
 EOF
   fi
   if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]
