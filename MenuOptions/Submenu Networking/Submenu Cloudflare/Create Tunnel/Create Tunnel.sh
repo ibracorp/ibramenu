@@ -52,7 +52,7 @@ tunnelcreation () {
 
   jid=$(basename *.json .json)
 
-  tee <<-EOF > docker-compose.yml
+  tee <<-EOF > compose.yaml
 services:
   cloudflared:
     image: cloudflare/cloudflared
