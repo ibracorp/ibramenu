@@ -385,3 +385,13 @@ then
   docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
 fi
 }
+
+# IBRAINFO
+ibrainfo () {
+  ibralogo
+  msgbox "Information"
+  msgbox "Docker Container"
+  docker container ls --format "table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Size}}\t{{.Networks}}"
+  echo
+  read -p "Press Enter to continue..."
+}

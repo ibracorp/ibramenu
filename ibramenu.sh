@@ -22,7 +22,7 @@ build_menu () {
 # Build and display Menu
 menu_from_array () {
   declare -a menu_choice
-  PS3="Enter 1-$#, B for back up a level or X for Exit: "
+  PS3="Enter 1-$#, B for going back up a level, I for Information or X for Exit: "
   select item
   do
     case $REPLY in
@@ -39,6 +39,10 @@ menu_from_array () {
           cd ..
           break
         fi
+        ;;
+      i|I)
+        ibrainfo
+        break
         ;;
       [1-$#])
         if [ "${item:0:7}" = "Submenu" ]
