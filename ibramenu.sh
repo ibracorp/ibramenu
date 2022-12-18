@@ -40,10 +40,6 @@ menu_from_array () {
           break
         fi
         ;;
-      i|I)
-        ibrainfo
-        break
-        ;;
       [1-$#])
         if [ "${item:0:7}" = "Submenu" ]
         then
