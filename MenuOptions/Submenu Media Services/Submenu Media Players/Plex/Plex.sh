@@ -61,6 +61,7 @@ local_appfinalization () {
   echo
   ip=$(hostname -I | awk '{print $1}')
   echo "$title: http://$ip:32400/web"
+  ibradashy
   msgbox "You can also find $title on your IBRACORP Dashy website:"
   echo "http://$ip:8086"
   echo
