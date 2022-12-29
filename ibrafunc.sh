@@ -274,10 +274,9 @@ app () {
 
 # IBRACORP Dashy
 ibradashy () {
-#  if [ -n $(cat "/opt/appdata/ibradashy/conf.yml" | grep "^      - title: $title$") ]
   if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" > /dev/null 2>&1
   then
-    position=$(expr $(grep -n "IBRAMENU added" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 1 )
+    position=$(expr $(grep -n "name: IBRAMENU" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 3 )
     sed -i "$position i \      - title: $title\\
         description: Click to launch $title\\
         icon: favicon\\
