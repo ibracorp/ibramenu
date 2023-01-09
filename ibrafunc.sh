@@ -345,6 +345,18 @@ sections:
         description: IBRAMENU Feedback and Voting
         icon: https://ibracorp.io/favicon.ico
         url: https://feedback.ibracorp.io/ibramenu
+  - name: Services
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    widgets:
+      - type: iframe
+        options:
+          url: https://i.ibracorp.io/services
+          frameHeight: 440
 appConfig:
   theme: Oblivion
   language: en
