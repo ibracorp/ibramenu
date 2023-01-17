@@ -10,7 +10,8 @@ This README is a work in progress and awaiting other tasks before being complete
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
-Clone repo and run the ibrainit.sh file
+Clone repo to "/opt/ibracorp/ibramenu/" and run the ibrainit.sh file.
+EX: ```git clone https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 
 **Want to Support Us and Get Perks?** <br>
