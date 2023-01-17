@@ -18,8 +18,8 @@ mkdir -p $ifolder
 apt update
 apt install sudo curl git ruby -y
 gem install mdless
-git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
-find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+# git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
+# find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Add ibramenu as systemwide alias
 if ! grep -q ibramenu /etc/bash.bashrc

@@ -13,12 +13,12 @@ ibralogo () {
   tput bold
   tput setaf 1
   tee <<-EOF
-  ___ ____  ____      _    ____ ___  ____  ____  ™ 
- |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \  
-  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) | 
-  | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  
- |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     
-                                                 
+  ___ ____  ____      _    ____ ___  ____  ____  ™
+ |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \
+  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) |
+  | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/
+ |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|
+
 IBRAINSTALL - Installer for IBRAMENU
 Become a Member and sponsor us: https://ibracorp.io/memberships
 EOF
@@ -104,9 +104,8 @@ EOF
 # Launch IBRAINSTALL
 install () {
   mkdir -p /opt/ibracorp
-  wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
-  chmod +x /opt/ibracorp/ibrainstall.sh
-  /opt/ibracorp/ibrainstall.sh $1
+  # wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
+  /opt/ibracorp/ibramenu/ibrainstall.sh $1
 }
 
 # Execute

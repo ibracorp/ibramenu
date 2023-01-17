@@ -6,10 +6,11 @@ IBRAMENU
 [![Ubuntu](https://img.shields.io/badge/Works%20best%20with-Ubuntu-E95420?style=plastic&logo=ubuntu&logoColor=white)](https://ubuntu.com)
 [![IBRADOCS](https://img.shields.io/badge/IBRA-Docs-blue?style=plastic)](https://docs.ibracorp.io)
 
-This README is a work in progress and awaiting other tasks before being completed. 
+This README is a work in progress and awaiting other tasks before being completed.
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
+Clone repo and run the inbrainit.sh file
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 
 **Want to Support Us and Get Perks?** <br>
