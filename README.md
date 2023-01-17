@@ -10,7 +10,7 @@ This README is a work in progress and awaiting other tasks before being complete
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
-Clone repo and run the inbrainit.sh file
+Clone repo and run the ibrainit.sh file
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 
 **Want to Support Us and Get Perks?** <br>
