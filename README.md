@@ -11,6 +11,8 @@ The actual documentation page below has all the information to help you get star
 
 **HOW TO INSTALL** <br>
 Clone repo to "/opt/ibracorp/ibramenu/" and run the ibrainit.sh file.
+After it finishes,  reboot.
+Open the ibramenu and choose option 2, then option 1 "all steps in one"
 EX: ```git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
