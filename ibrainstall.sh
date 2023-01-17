@@ -9,9 +9,9 @@
 
 # Check for existing ibramenu folder and clean up if needed
 ifolder="/opt/ibracorp/ibramenu"
-if [ -d $ifolder ]; then
-  rm -r $ifolder
-fi
+# if [ -d $ifolder ]; then
+#   rm -r $ifolder
+# fi
 mkdir -p $ifolder
 
 # Clone ibramenu
