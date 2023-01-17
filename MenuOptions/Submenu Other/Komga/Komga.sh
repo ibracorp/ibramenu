@@ -12,7 +12,7 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 # App Info
 app="Komga"                                  # App Name
 title="Komga"                                # Readable App Title
-image="lscr.io/linuxserver/Komga:latest"     # Image and Tag
+image="gotson/komga"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
 tp_app="Komga"                               # Theme Park App Name
