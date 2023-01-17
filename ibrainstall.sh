@@ -11,15 +11,15 @@
 ifolder="/opt/ibracorp/ibramenu"
 # if [ -d $ifolder ]; then
 #   rm -r $ifolder
-# fi
-mkdir -p $ifolder
+# # fi
+# mkdir -p $ifolder
 
 # Clone ibramenu
 apt update
 apt install sudo curl git ruby -y
 gem install mdless
 # git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
-# find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+ find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Add ibramenu as systemwide alias
 if ! grep -q ibramenu /etc/bash.bashrc
