@@ -13,20 +13,20 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
 read -p "Your login email            : " email
 read -p "Please enter komga password     : " passwd
-echo "KOMF_KOMGA_USER=$email" >> .env
-echo "KOMF_KOMGA_PASSWORD=$passwd" >> .env
+echo "KOMF_KOMGA_USER=$email" >> /opt/appdata/$app.env
+echo "KOMF_KOMGA_PASSWORD=$passwd" >> /opt/appdata/$app.env
 
 # App Info
-app="komf"                                  # App Name
-title="komf"                                # Readable App Title
-image="sndxr/komf:latest"     # Image and Tag
+app="Komf"                                  # App Name
+title="Komf"                                # Readable App Title
+image="sndxr/Komf:latest"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
-tp_app="komf"                               # Theme Park App Name
+tp_app="Komf"                               # Theme Park App Name
 porte="8089"                                    # External Port
 porti="8085"                                    # Internal Port
 extrapayload="    environment: # optional env config
-      - KOMF_KOMGA_BASE_URI=http://komga
+      - KOMF_KOMGA_BASE_URI=http://komga:8085
       - KOMF_KOMGA_USER=$email
       - KOMF_KOMGA_PASSWORD=$passwd
       - KOMF_LOG_LEVEL=INFO
