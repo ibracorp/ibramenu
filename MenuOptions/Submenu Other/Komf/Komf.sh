@@ -35,5 +35,5 @@ extrapayload="    environment: # optional env config
 # Execute
 app
 mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
-echo "KOMF_KOMGA_USER=$email" >> /opt/appdata/$app.env
-echo "KOMF_KOMGA_PASSWORD=$passwd" >> /opt/appdata/$app.env
+echo "KOMF_KOMGA_USER=$email" >> /opt/appdata/$app/.env
+echo "KOMF_KOMGA_PASSWORD=$passwd" >> /opt/appdata/$app/.env
