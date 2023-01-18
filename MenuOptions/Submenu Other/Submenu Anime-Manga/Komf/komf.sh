@@ -10,6 +10,7 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # Collect komga login email and password
+mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
 read -p "Your login email            : " email
 read -p "Please enter komga password     : " passwd
 echo "KOMF_KOMGA_USER=$email" >> .env
@@ -21,7 +22,7 @@ title="komf"                                # Readable App Title
 image="sndxr/komf:latest"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
-tp_app=""                               # Theme Park App Name
+tp_app="komf"                               # Theme Park App Name
 porte="8089"                                    # External Port
 porti="8085"                                    # Internal Port
 extrapayload="    environment: # optional env config
