@@ -18,7 +18,7 @@ read -p "Please enter komga password     : " passwd
 # App Info
 app="Komf"                                  # App Name
 title="Komf"                                # Readable App Title
-image="sndxr/Komf:latest"     # Image and Tag
+image="sndxr/komf:latest"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
 tp_app="Komf"                               # Theme Park App Name
