@@ -10,11 +10,10 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # Collect komga login email and password
-mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
+
 read -p "Your login email            : " email
 read -p "Please enter komga password     : " passwd
-echo "KOMF_KOMGA_USER=$email" >> /opt/appdata/$app.env
-echo "KOMF_KOMGA_PASSWORD=$passwd" >> /opt/appdata/$app.env
+
 
 # App Info
 app="Komf"                                  # App Name
@@ -35,3 +34,6 @@ extrapayload="    environment: # optional env config
 
 # Execute
 app
+mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
+echo "KOMF_KOMGA_USER=$email" >> /opt/appdata/$app.env
+echo "KOMF_KOMGA_PASSWORD=$passwd" >> /opt/appdata/$app.env
