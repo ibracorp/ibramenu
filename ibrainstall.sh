@@ -31,7 +31,7 @@ fi
 # Add ibraupdate as systemwide alias
 if ! grep -q ibraupdate /etc/bash.bashrc
 then
-  insert_alias="alias ibraupdate='sudo /opt/ibracorp/ibrainstall.sh'"
+  insert_alias="alias ibraupdate='sudo /opt/ibracorp/ibramenu/ibraupdate.sh'"
   echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
   source /etc/bash.bashrc
 fi
