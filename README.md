@@ -13,10 +13,10 @@ The actual documentation page below has all the information to help you get star
 Clone repo to "/opt/ibracorp/ibramenu/" and run the ibrainit.sh file.
 After it finishes,  reboot.
 Open the ibramenu and choose option 2, then option 1 "all steps in one"
-EX: ```git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
+EX: ```sudo git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
-
+Make Request at this link: "https://feedback.ibracorp.io/ibramenu
 **Want to Support Us and Get Perks?** <br>
 [![Supporter](https://img.shields.io/badge/Become%20a-Supporter-brightgreen?style=plastic)](https://ibramenu.io/store/)
 
