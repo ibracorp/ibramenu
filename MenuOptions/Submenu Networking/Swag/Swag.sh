@@ -38,4 +38,4 @@ extrapayload="    ports:
 
 # Execute
 app
-echo "dns_cloudflare_api_token = $CF_API_TOKEN" > /etc/update-motd.d/01-ibracorp
+echo "dns_cloudflare_api_token = $CF_API_TOKEN" > /mnt/user/appdata/swag/dns-conf/cloudflare.ini
