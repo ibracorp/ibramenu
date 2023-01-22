@@ -7,7 +7,7 @@
 ######################################################################
 
 read -p "Your Domain (domain.com)            : " domain
-read -p "Your Cloudflare API token (domain.com)            : " CF_API_TOKEN
+read -p "Your Cloudflare API token           : " CF_API_TOKEN
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
@@ -38,4 +38,4 @@ extrapayload="    ports:
 
 # Execute
 app
-echo "dns_cloudflare_api_token = $CF_API_TOKEN" > /mnt/user/appdata/swag/dns-conf/cloudflare.ini
+echo "dns_cloudflare_api_token = $CF_API_TOKEN" > /opt/appdata/Swag/dns-conf/cloudflare.ini
