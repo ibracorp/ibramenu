@@ -37,7 +37,7 @@ then
 fi
 
 # Include ibrafunc for all the awesome functions
-source /opt/ibracorp/ibramenu/ibrainstall.sh
+source /opt/ibracorp/ibramenu/ibrafunc.sh
 ibramotd
 ibralogo
 if [[ -n $1 ]]

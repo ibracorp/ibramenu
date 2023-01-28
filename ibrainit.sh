@@ -120,4 +120,4 @@ then
 fi
 checklist
 install $1
-source /opt/ibracorp/ibramenu/ibraupdate.sh
+source /opt/ibracorp/ibramenu/ibrainstall.sh
