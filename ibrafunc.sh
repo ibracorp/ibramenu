@@ -240,13 +240,13 @@ EOF
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
     networks:
-      - ibranet
+      - $dockernet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 $extrapayload
 networks:
-  ibranet:
+  $dockernet:
     driver: bridge
     external: true
 EOF
@@ -381,13 +381,13 @@ services:
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
     networks:
-      - ibranet
+      - $dockernet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 
 networks:
-  ibranet:
+  $dockernet:
     driver: bridge
     external: true
 EOF
