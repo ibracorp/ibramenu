@@ -34,7 +34,7 @@ services:
       WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
       ADMIN_TOKEN: $admintoken
     networks:
-      - ibranet
+      - $dockernet
     ports:
       - '8084:80'
     volumes:
@@ -43,7 +43,7 @@ services:
     security_opt:
       - apparmor:unconfined
 networks:
-  ibranet:
+  $dockernet:
     driver: bridge
     external: true
 EOF
