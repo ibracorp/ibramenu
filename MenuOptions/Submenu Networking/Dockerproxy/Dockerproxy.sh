@@ -19,7 +19,7 @@ porte=""                                    # External Port
 porti=""                                    # Internal Port
 extrapayload="    environment:
       CONTAINERS: 1
-      POST: 0    privileged: true
+      POST: 0
 
     "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
