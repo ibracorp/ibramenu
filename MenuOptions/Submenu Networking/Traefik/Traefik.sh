@@ -12,7 +12,7 @@ read -p "Your Cloudflare API token           : " CF_API_TOKEN
 mkdir -p /opt/appdata/Traefik
 tee <<-EOF > /opt/appdata/Traefik/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
-DOMAIN=$YOURDOMAIN
+DOMAIN=${YOURDOMAIN}
 EMAIL=$YOUREMAIL
 EOF
 # Include ibrafunc for all the awesome functions
@@ -34,7 +34,7 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      traefik.http.routers.api.rule: Host(traefik.$YOURDOMAIN)    # Define the subdomain for the traefik dashboard.
+      traefik.http.routers.api.rule: Host(traefik.${YOURDOMAIN})    # Define the subdomain for the traefik dashboard.
       traefik.http.routers.api.entryPoints: https    # Set the Traefik entry point.
       traefik.http.routers.api.service: api@internal    # Enable Traefik API.
       traefik.enable: true   # Enable Traefik reverse proxy for the Traefik dashboard.
@@ -113,9 +113,9 @@ entryPoints:
         # Generate a wildcard domain certificate
         certResolver: letsencrypt
         domains:
-          - main: $YOURDOMAIN
+          - main: ${YOURDOMAIN}
             sans:
-              - '*.$YOURDOMAIN'
+              - '*.${YOURDOMAIN}'
       middlewares:
         - securityHeaders@file
 
@@ -132,7 +132,7 @@ providers:
     watch: true
     network: $dockernet # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.$YOURDOMAIN`)"
+    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}`)"
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
@@ -169,7 +169,7 @@ http:
   #   homeassistant:
   #     entryPoints:
   #       - https
-  #     rule: 'Host(`homeassistant.$YOURDOMAIN`)'
+  #     rule: 'Host(`homeassistant.${YOURDOMAIN}`)'
   #     service: homeassistant
   #     middlewares:
   #       - "auth"
@@ -193,7 +193,7 @@ http:
     # # Authelia guard
     # auth:
     #   forwardauth:
-    #     address: http://auth:9091/api/verify?rd=https://auth.$YOURDOMAIN/ # replace auth with your authelia container name
+    #     address: http://auth:9091/api/verify?rd=https://auth.${YOURDOMAIN}/ # replace auth with your authelia container name
     #     trustForwardHeader: true
     #     authResponseHeaders:
     #       - Remote-User
