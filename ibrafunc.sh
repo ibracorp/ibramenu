@@ -236,9 +236,15 @@ EOF
   then
     echo "$volumes" >> compose.yaml
   fi
-  tee <<-EOF >> compose.yaml
+   if [ ! -z "$porti" ]
+  then
+    tee <<-EOF >> compose.yaml
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
+EOF
+  fi
+
+tee <<-EOF >> compose.yaml
     networks:
       - $dockernet
     restart: unless-stopped
