@@ -10,7 +10,7 @@ read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
 mkdir -p /opt/appdata/traefik
-tee <<-EOF > /opt/appdata/traefik/.traefik.env
+tee <<-EOF > /opt/appdata/Traefik/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=$YOURDOMAIN
 EMAIL=$YOUREMAIL
@@ -51,9 +51,9 @@ app
 sleep 2
 
 #create file for certificates
-sudo touch /opt/appdata/traefik/acme.json
-sudo chmod 600 /opt/appdata/traefik/acme.json
+sudo touch /opt/appdata/Traefik/acme.json
+sudo chmod 600 /opt/appdata/Traefik/acme.json
 
 # Create the config files
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/traefik/fileConfig.yml"
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/traefik/traefik.yml"
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/Traefik/fileConfig.yml"
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/Traefik/traefik.yml"
