@@ -55,5 +55,5 @@ sudo touch /opt/appdata/traefik/acme.json
 sudo chmod 600 /opt/appdata/traefik/acme.json
 
 # Create the config files
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | tee "/opt/appdata/traefik/fileConfig.yml"
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | tee "/opt/appdata/traefik/traefik.yml"
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee "/opt/appdata/traefik/fileConfig.yml"
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee "/opt/appdata/traefik/traefik.yml"
