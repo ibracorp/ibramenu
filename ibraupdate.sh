@@ -8,7 +8,7 @@
 ######################################################################
 
 sudo bash -c "rm -R /opt/ibracorp/ibramenu/"
-sudo bash -c "git clone -b main --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu"
+sudo bash -c "git clone -b traefik2 --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu"
 cd find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Include ibrafunc for all the awesome functions
