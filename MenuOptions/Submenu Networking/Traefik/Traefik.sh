@@ -151,7 +151,7 @@ log:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: $YOURDOMAIN
+      email: $YOUREMAIL
       storage: /etc/traefik/acme.json
       dnsChallenge:
         provider: cloudflare
@@ -194,7 +194,7 @@ http:
     # # Authelia guard
     # auth:
     #   forwardauth:
-    #     address: http://auth:9091/api/verify?rd=https://auth.$YOUREMAIL/ # replace auth with your authelia container name
+    #     address: http://auth:9091/api/verify?rd=https://auth.$YOURDOMAIN/ # replace auth with your authelia container name
     #     trustForwardHeader: true
     #     authResponseHeaders:
     #       - Remote-User
