@@ -23,7 +23,7 @@ porti=""                                    # Internal Port
 extrapayload="    ports:
       - 443:443
       - 80:80
-      -8080:8080
+      - 8080:8080
     labels:
       traefik.http.routers.api.rule: Host(`traefik.$domain`)    # Define the subdomain for the traefik dashboard.
       traefik.http.routers.api.entryPoints: https    # Set the Traefik entry point.
