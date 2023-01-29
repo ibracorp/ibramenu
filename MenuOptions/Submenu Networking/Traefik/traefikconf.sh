@@ -1,7 +1,6 @@
 #!/bin/bash
 config () {
-
-  tee <<-'EOF' > /opt/appdata/Traefik/traefik.yml"
+  tee <<-EOF > /opt/appdata/Traefik/traefik.yml
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
@@ -102,7 +101,7 @@ certificatesResolvers:
           - "1.0.0.1:53"
 EOF
 
-tee <<-'EOF' > "/opt/appdata/Traefik/fileConfig.yml"
+tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
 http:
 
   ## EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##

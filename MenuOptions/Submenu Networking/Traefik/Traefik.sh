@@ -9,7 +9,7 @@
 read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
-mkdir -p /opt/appdata/traefik
+mkdir -p /opt/appdata/Traefik
 tee <<-EOF > /opt/appdata/Traefik/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=$YOURDOMAIN
