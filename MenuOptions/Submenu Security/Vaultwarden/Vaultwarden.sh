@@ -8,6 +8,7 @@
 
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
+admintoken=$(openssl rand -base64 48)
 
 # App Info
 app="vaultwarden"                 # App Name
@@ -19,11 +20,11 @@ tp_app=""                               # Theme Park App Name
 porte="4743"                                    # External Port
 porti="80"                                    # Internal Port
 extrapayload="    environment:
-      - WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
-      - ADMIN_TOKEN: $admintoken
+      - WEBSOCKET_ENABLED=true  # Enable WebSocket notifications.
+      - ADMIN_TOKEN=$admintoken
     "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
 
 # Execute
 app
-admintoken=$(openssl rand -base64 48)
+
