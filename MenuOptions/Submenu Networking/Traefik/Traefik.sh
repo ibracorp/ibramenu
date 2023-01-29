@@ -60,3 +60,10 @@ sudo chmod 600 /opt/appdata/Traefik/acme.json
 # # Create the config files
 # sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/Traefik/fileConfig.yml"
 # sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/Traefik/traefik.yml"
+tee <<-EOF > /opt/appdata/Traefik/traefik.yml
+          - "1.0.0.1:53"
+EOF
+
+tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
+
+EOF
