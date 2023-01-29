@@ -25,7 +25,8 @@ app="Traefik"                                  # App Name
 title="Traefik"                                # Readable App Title
 image="traefik:v3.0.0-beta2"     # Image and Tag
 volumes="    volumes:
-      - /opt/appdata/\${APP_NAME:?err}:/etc/traefik" # Volumes
+      - /opt/appdata/\${APP_NAME:?err}:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro" # Volumes
 tp_app=""                               # Theme Park App Name
 porte=""                                    # External Port
 porti=""                                    # Internal Port
@@ -34,14 +35,14 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      - traefik.http.routers.api.rule=Host(`traefik.${YOURDOMAIN}`)    # Define the subdomain for the traefik dashboard.
+      - traefik.http.routers.api.rule=Host("traefik.${YOURDOMAIN}")    # Define the subdomain for the traefik dashboard.
       - traefik.http.routers.api.entryPoints=https    # Set the Traefik entry point.
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
     command: --api.insecure=true --providers.docker
     environment:
       - CF_DNS_API_TOKEN=$CF_API_TOKEN
-      - DOCKER_HOST=Dockerproxy
+      - CF_API_EMAIL=${YOUREMAIL}
     depends_on:
       - Dockerproxy
 
@@ -115,7 +116,7 @@ entryPoints:
         domains:
           - main: ${YOURDOMAIN}
             sans:
-              - '*.${YOURDOMAIN}'
+              - "*.${YOURDOMAIN}"
       middlewares:
         - securityHeaders@file
 
@@ -130,12 +131,12 @@ providers:
   # Docker provider for connecting all apps that are inside of the docker network
   docker:
     watch: true
-    network: $dockernet # Add Your Docker Network Name Here
+    network: ${dockernet} # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}`)"
+    defaultRule: "Host("{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}")"
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
-    endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
+    #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
 
 # Enable traefik ui
 api:
@@ -150,7 +151,7 @@ log:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: $YOUREMAIL
+      email: ${YOUREMAIL}
       storage: /etc/traefik/acme.json
       dnsChallenge:
         provider: cloudflare
@@ -169,7 +170,7 @@ http:
   #   homeassistant:
   #     entryPoints:
   #       - https
-  #     rule: 'Host(`homeassistant.${YOURDOMAIN}`)'
+  #     rule: "Host("homeassistant.${YOURDOMAIN}")"
   #     service: homeassistant
   #     middlewares:
   #       - "auth"
