@@ -43,7 +43,7 @@ extrapayload="    ports:
     environment:
       - CF_DNS_API_TOKEN=$CF_API_TOKEN
       - CF_API_EMAIL=${YOUREMAIL}
-    
+
     "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
 
@@ -135,6 +135,7 @@ providers:
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
+    endpoint: "unix:///var/run/docker.sock" # comment if using docker socket proxy
 
 # Enable traefik ui
 api:
@@ -143,16 +144,17 @@ api:
 
 # Log level INFO|DEBUG|ERROR
 log:
-  level: INFO
+  level: DEBUG
 
-# Use letsencrypt to generate ssl serficiates
+# Use cloudflare to generate ssl serficiates
 certificatesResolvers:
-  letsencrypt:
+  cloudflare:
     acme:
       email: ${YOUREMAIL}
       storage: /etc/traefik/acme.json
       dnsChallenge:
         provider: cloudflare
+        #disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
         # Used to make sure the dns challenge is propagated to the rights dns servers
         resolvers:
           - "1.1.1.1:53"
@@ -187,7 +189,7 @@ http:
       ipWhiteList:
         sourceRange:
           - 127.0.0.1/32 # localhost
-          - 192.168.1.1/24 # LAN Subnet
+          - 192.168.1.0/24 # LAN Subnet
 
     # # Authelia guard
     # auth:
