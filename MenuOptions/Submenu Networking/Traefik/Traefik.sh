@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################
 # Title   : Install Komga
-# By      : DiscDuck
+# By      : taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################
@@ -18,6 +18,8 @@ EOF
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh
+# Traefik config
+source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefikconf.sh
 # App Info
 app="Traefik"                                  # App Name
 title="Traefik"                                # Readable App Title
@@ -50,10 +52,11 @@ extrapayload="    ports:
 app
 sleep 2
 
+config
 #create file for certificates
 sudo touch /opt/appdata/Traefik/acme.json
 sudo chmod 600 /opt/appdata/Traefik/acme.json
 
-# Create the config files
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/Traefik/fileConfig.yml"
-sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/Traefik/traefik.yml"
+# # Create the config files
+# sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/Traefik/fileConfig.yml"
+# sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/Traefik/traefik.yml"
