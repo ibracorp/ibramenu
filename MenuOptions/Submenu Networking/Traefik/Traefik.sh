@@ -52,7 +52,7 @@ extrapayload="    ports:
 app
 sleep 2
 
-config
+
 #create file for certificates
 sudo touch /opt/appdata/Traefik/acme.json
 sudo chmod 600 /opt/appdata/Traefik/acme.json
