@@ -16,8 +16,8 @@ image="vaultwarden/server:latest" # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/data" # Volumes
 tp_app=""                               # Theme Park App Name
- porte="4743"                                    # External Port
- porti="80"                                    # Internal Port
+porte="4743"                                    # External Port
+porti="80"                                    # Internal Port
 extrapayload="    environment:
       - WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
       - ADMIN_TOKEN: $admintoken
