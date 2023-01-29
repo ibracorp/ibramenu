@@ -19,7 +19,7 @@ EOF
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh
 # Traefik config
-source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefikconf.sh
+
 # App Info
 app="Traefik"                                  # App Name
 title="Traefik"                                # Readable App Title
@@ -58,8 +58,7 @@ sudo touch /opt/appdata/Traefik/acme.json
 sudo chmod 600 /opt/appdata/Traefik/acme.json
 
 # # Create the config files
-# sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | sudo tee > "/opt/appdata/Traefik/fileConfig.yml"
-# sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | sudo tee > "/opt/appdata/Traefik/traefik.yml"
+
 tee <<-EOF > /opt/appdata/Traefik/traefik.yml
 global:
   checkNewVersion: true
