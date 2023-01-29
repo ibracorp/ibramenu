@@ -15,8 +15,8 @@ image="ghcr.io/tecnativa/docker-socket-proxy:latest"     # Image and Tag
 volumes="    volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro" # Volumes
 tp_app=""                               # Theme Park App Name
-porte=""                                    # External Port
-porti=""                                    # Internal Port
+porte="2375"                                    # External Port
+porti="2375"                                    # Internal Port
 extrapayload="    environment:
       CONTAINERS: 1
       POST: 0
