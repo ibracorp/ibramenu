@@ -7,7 +7,7 @@
 ######################################################################
 
 read -p "Your Domain (domain.com)            : " YOURDOMAIN
-read -p "Your Domain (domain.com)            : " YOUREMAIL
+read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
 mkdir -p /opt/appdata/traefik
 tee <<-EOF > /opt/appdata/traefik/.traefik.env
@@ -55,5 +55,5 @@ sudo touch /opt/appdata/traefik/acme.json
 sudo chmod 600 /opt/appdata/traefik/acme.json
 
 # Create the config files
-sudo cat /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml  | tee /opt/appdata/traefik/fileConfig.yml
-sudo cat /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml  | tee /opt/appdata/traefik/traefik.yml
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml"  | tee "/opt/appdata/traefik/fileConfig.yml"
+sudo cat "/opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml"  | tee "/opt/appdata/traefik/traefik.yml"
