@@ -1,0 +1,84 @@
+http:
+
+  ## EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##
+  # routers:
+  #   # Homeassistant routing example - Remove if not used
+  #   homeassistant:
+  #     entryPoints:
+  #       - https
+  #     rule: 'Host(`homeassistant.$DOMAIN`)'
+  #     service: homeassistant
+  #     middlewares:
+  #       - "auth"
+  # ## SERVICES EXAMPLE ##
+  # services:
+  #   # Homeassistant service example - Remove if not used
+  #   homeassistant:
+  #     loadBalancer:
+  #       servers:
+  #         - url: http://192.168.60.5:8123/
+
+  ## MIDDLEWARES ##
+  middlewares:
+    # Only Allow Local networks
+    local-ipwhitelist:
+      ipWhiteList:
+        sourceRange:
+          - 127.0.0.1/32 # localhost
+          - 192.168.1.1/24 # LAN Subnet
+
+    # # Authelia guard
+    # auth:
+    #   forwardauth:
+    #     address: http://auth:9091/api/verify?rd=https://auth.$DOMAIN/ # replace auth with your authelia container name
+    #     trustForwardHeader: true
+    #     authResponseHeaders:
+    #       - Remote-User
+    #       - Remote-Groups
+    #       - Remote-Name
+    #       - Remote-Email
+
+    # # Authelia basic auth guard
+    # auth-basic:
+    #   forwardauth:
+    #     address: http://auth:9091/api/verify?auth=basic # replace auth with your authelia container name
+    #     trustForwardHeader: true
+    #     authResponseHeaders:
+    #       - Remote-User
+    #       - Remote-Groups
+    #       - Remote-Name
+    #       - Remote-Email
+
+    # Security headers
+    securityHeaders:
+      headers:
+        customResponseHeaders:
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
+          server: ""
+          X-Forwarded-Proto: "https"
+        sslProxyHeaders:
+          X-Forwarded-Proto: https
+        referrerPolicy: "strict-origin-when-cross-origin"
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        contentTypeNosniff: true
+        browserXssFilter: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsSeconds: 63072000
+        stsPreload: true
+
+# Only use secure ciphers - https://ssl-config.mozilla.org/#server=traefik&version=2.6.0&config=intermediate&guideline=5.6
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
