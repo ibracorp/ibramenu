@@ -40,4 +40,3 @@ extrapayload="    ports:
 
 # Execute
 app
-touch "/opt/appdata/traefik/acme.json; chmod 600 /opt/appdata/traefik/acme.json"
