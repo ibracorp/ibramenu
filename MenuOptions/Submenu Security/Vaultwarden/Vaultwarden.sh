@@ -13,60 +13,17 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 app="vaultwarden"                 # App Name
 title="Vaultwarden"               # Readable App Title
 image="vaultwarden/server:latest" # Image and Tag
+volumes="    volumes:
+      - /opt/appdata/\${APP_NAME:?err}:/data" # Volumes
+tp_app=""                               # Theme Park App Name
+ porte="4743"                                    # External Port
+ porti="80"                                    # Internal Port
+extrapayload="    environment:
+      - WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
+      - ADMIN_TOKEN: $admintoken
+    "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
-# App
-local_appcreate () {
-  msgbox "Installing $title..."
-  mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
-  tee <<-EOF > .env
-APP_NAME=$app
-IMAGE=$image
-EOF
-  tee <<-EOF > compose.yaml
-services:
-  service-name:
-    image: \${IMAGE:?err}
-    container_name: \${APP_NAME:?err}
-    env_file:
-      - /opt/appdata/.id.env
-      - /opt/appdata/.timezone.env
-    environment:
-      WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
-      ADMIN_TOKEN: $admintoken
-    networks:
-      - $dockernet
-    ports:
-      - '8084:80'
-    volumes:
-      - ./data:/data
-    restart: unless-stopped
-    security_opt:
-      - apparmor:unconfined
-networks:
-  $dockernet:
-    driver: bridge
-    external: true
-EOF
-  docker compose up -d --force-recreate
-}
-
-# List Links
-local_appfinalization () {
-  ibralogo
-  msgbox "All Done! Here is the link to $title:"
-  echo
-  ip=$(hostname -I | awk '{print $1}')
-  echo "$title: http://$ip:8084/admin"
-  echo
-  echo "Your Admin Token is: $admintoken"
-  echo "Keep this token secret! This is the password to access the admin area of your server!"
-  echo
-}
 
 # Execute
-
-# Generate Admin Token
+app
 admintoken=$(openssl rand -base64 48)
-
-local_appcreate
-local_appfinalization
