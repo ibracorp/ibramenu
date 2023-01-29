@@ -9,7 +9,8 @@
 read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your Domain (domain.com)            : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
-tee <<-EOF > .env
+mkdir -p /opt/appdata/traefik
+tee <<-EOF > /opt/appdata/traefik/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=$YOURDOMAIN
 EMAIL=$YOUREMAIL
@@ -47,5 +48,12 @@ extrapayload="    ports:
 
 # Execute
 app
+sleep 2
+
+#create file for certificates
 sudo touch /opt/appdata/traefik/acme.json
 sudo chmod 600 /opt/appdata/traefik/acme.json
+
+# Create the config files
+sudo cat /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/fileConfig.yml  | tee /opt/appdata/traefik/fileConfig.yml
+sudo cat /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Traefik/traefik.yml  | tee /opt/appdata/traefik/traefik.yml
