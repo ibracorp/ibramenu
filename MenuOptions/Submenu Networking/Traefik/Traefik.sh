@@ -35,7 +35,7 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      - traefik.http.routers.api.rule=Host("traefik.${YOURDOMAIN}")    # Define the subdomain for the traefik dashboard.
+      - traefik.http.routers.api.rule='Host(`traefik.${YOURDOMAIN}`)'    # Define the subdomain for the traefik dashboard.
       - traefik.http.routers.api.entryPoints=https    # Set the Traefik entry point.
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
@@ -114,7 +114,7 @@ entryPoints:
         domains:
           - main: ${YOURDOMAIN}
             sans:
-              - "*.${YOURDOMAIN}"
+              - '*.${YOURDOMAIN}'
       middlewares:
         - securityHeaders@file
 
@@ -131,7 +131,7 @@ providers:
     watch: true
     network: ${dockernet} # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host("{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}")"
+    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}`)"
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
@@ -164,23 +164,23 @@ EOF
 tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
 http:
 
-  ## EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##
-  # routers:
-  #   # Homeassistant routing example - Remove if not used
-  #   homeassistant:
-  #     entryPoints:
-  #       - https
-  #     rule: "Host("homeassistant.${YOURDOMAIN}")"
-  #     service: homeassistant
-  #     middlewares:
-  #       - "auth"
-  # ## SERVICES EXAMPLE ##
-  # services:
-  #   # Homeassistant service example - Remove if not used
-  #   homeassistant:
-  #     loadBalancer:
-  #       servers:
-  #         - url: http://192.168.60.5:8123/
+  # EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##
+  routers:
+    # Homeassistant routing example - Remove if not used
+    homeassistant:
+      entryPoints:
+        - https
+      rule: "Host(`homeassistant.${YOURDOMAIN}`)"
+      service: homeassistant
+      middlewares:
+        - "auth"
+  ## SERVICES EXAMPLE ##
+  services:
+    # Homeassistant service example - Remove if not used
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: http://192.168.60.5:8123/
 
   ## MIDDLEWARES ##
   middlewares:
@@ -189,29 +189,29 @@ http:
       ipWhiteList:
         sourceRange:
           - 127.0.0.1/32 # localhost
-          - 192.168.1.0/24 # LAN Subnet
+          - 192.168.1.1/24 # LAN Subnet
 
-    # # Authelia guard
-    # auth:
-    #   forwardauth:
-    #     address: http://auth:9091/api/verify?rd=https://auth.${YOURDOMAIN}/ # replace auth with your authelia container name
-    #     trustForwardHeader: true
-    #     authResponseHeaders:
-    #       - Remote-User
-    #       - Remote-Groups
-    #       - Remote-Name
-    #       - Remote-Email
+    # Authelia guard
+    auth:
+      forwardauth:
+        address: http://auth:9091/api/verify?rd=https://auth.${YOURDOMAIN}/ # replace auth with your authelia container name
+        trustForwardHeader: true
+        authResponseHeaders:
+          - Remote-User
+          - Remote-Groups
+          - Remote-Name
+          - Remote-Email
 
-    # # Authelia basic auth guard
-    # auth-basic:
-    #   forwardauth:
-    #     address: http://auth:9091/api/verify?auth=basic # replace auth with your authelia container name
-    #     trustForwardHeader: true
-    #     authResponseHeaders:
-    #       - Remote-User
-    #       - Remote-Groups
-    #       - Remote-Name
-    #       - Remote-Email
+    # Authelia basic auth guard
+    auth-basic:
+      forwardauth:
+        address: http://auth:9091/api/verify?auth=basic # replace auth with your authelia container name
+        trustForwardHeader: true
+        authResponseHeaders:
+          - Remote-User
+          - Remote-Groups
+          - Remote-Name
+          - Remote-Email
 
     # Security headers
     securityHeaders:
