@@ -36,7 +36,7 @@ extrapayload="    ports:
       - 8080:8080
     labels:
       - traefik.http.routers.api.rule="Host(`traefik.${YOURDOMAIN}`)"    # Define the subdomain for the traefik dashboard add you doamin to the end.
-      - traefik.http.routers.api.entryPoints=https    # Set the Traefik entry point.
+      #- traefik.http.middlewares.traefik-auth.basicauth.users=USER:BASIC_AUTH_PASSWORD # use htpasswd -c /path/to/passwdfile username in the command line to create a use:passwrd
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
     command: --api.insecure=true --providers.docker
