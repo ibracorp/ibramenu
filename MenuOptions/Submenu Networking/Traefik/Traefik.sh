@@ -35,7 +35,7 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      - traefik.http.routers.api.rule='Host(`traefik.${YOURDOMAIN}`)'    # Define the subdomain for the traefik dashboard.
+      - traefik.http.routers.api.rule="Host(`traefik.${YOURDOMAIN}`)"    # Define the subdomain for the traefik dashboard add you doamin to the end.
       - traefik.http.routers.api.entryPoints=https    # Set the Traefik entry point.
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
@@ -131,7 +131,7 @@ providers:
     watch: true
     network: ${dockernet} # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.YOURDOMAIN.COM`)"
+    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.YOURDOMAIN.COM`)" # Make sure to check the guide if it is blank
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
@@ -148,7 +148,7 @@ log:
 
 # Use cloudflare to generate ssl serficiates
 certificatesResolvers:
-  cloudflare:
+  letsencrypt:
     acme:
       email: ${YOUREMAIL}
       storage: /etc/traefik/acme.json
@@ -170,7 +170,7 @@ http:
     homeassistant:
       entryPoints:
         - https
-      rule: "Host(`homeassistant.${YOURDOMAIN}`)"
+      rule: "Host(`homeassistant.${YOURDOMAIN}`)" # make sure to chek the guide if and add your domain if blank
       service: homeassistant
       middlewares:
         - "auth"
