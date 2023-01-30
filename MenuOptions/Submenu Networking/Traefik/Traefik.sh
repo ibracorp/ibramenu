@@ -23,7 +23,7 @@ source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerp
 # App Info
 app="Traefik"                                  # App Name
 title="Traefik"                                # Readable App Title
-image="traefik:v3.0.0-beta2"     # Image and Tag
+image="traefik:latest"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro" # Volumes
@@ -131,7 +131,7 @@ providers:
     watch: true
     network: ${dockernet} # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}`)"
+    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.YOURDOMAIN.COM`)"
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
