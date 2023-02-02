@@ -1,6 +1,6 @@
 #!/bin/bash
 ######################################################################
-# Title   : Install Overseerr
+# Title   : Install Komga
 # By      : DiscDuck
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
@@ -10,14 +10,16 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # App Info
-app="overseerr"                                 # App Name
-title="Overseerr"                               # Readable App Title
-image="lscr.io/linuxserver/overseerr:latest"    # Image and Tag
+app="Komga"                                  # App Name
+title="Komga"                                # Readable App Title
+image="gotson/komga"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
-porte="5055"                                    # External Port
-porti="5055"                                    # Internal Port
+tp_app="Komga"                               # Theme Park App Name
+porte="8085"                                    # External Port
+porti="8080"                                    # Internal Port
 extrapayload=""                                 # Extra Payload to add to the Compose
+
 
 # Execute
 app
