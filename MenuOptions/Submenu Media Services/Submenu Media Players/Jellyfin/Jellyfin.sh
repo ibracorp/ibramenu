@@ -42,13 +42,13 @@ services:
 #      - 7359:7359/udp #optional
 #      - 1900:1900/udp #optional
     networks:
-      - $dockernet
+      - ibranet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 
 networks:
-  $dockernet:
+  ibranet:
     driver: bridge
     external: true
 EOF

@@ -8,8 +8,6 @@
 
 # functions
 
-# profile file
-source /opt/ibracorp/ibramenu/.profile
 # message box
 msgbox () {
   # function expects a message and optional parameters
@@ -65,12 +63,12 @@ ibralogo () {
   tput bold
   tput setaf 1
   tee <<-EOF
-  ___ ____  ____      _    ____ ___  ____  ____  ™
- |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \
-  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) |
+  ___ ____  ____      _    ____ ___  ____  ____  ™ 
+ |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \  
+  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) | 
   | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  Public
  |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     Version $version
-
+                                                 
 $(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
 Become a Member and sponsor us: https://ibracorp.io/memberships
 EOF
@@ -190,10 +188,10 @@ ibramotd () {
 ######################################################################
 tee <<-EOF
   ___ ____  ____      _    ____ ___  ____  ____     (tm)
- |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \
-  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) |
-  | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/
- |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|
+ |_ _| __ )|  _ \    / \  / ___/ _ \|  _ \|  _ \  
+  | ||  _ \| |_) |  / _ \| |  | | | | |_) | |_) | 
+  | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  
+ |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     
 $(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
 Become a Member and sponsor us: https://ibracorp.io/memberships
 Type 'ibramenu' to launch IBRAMENU.
@@ -236,23 +234,17 @@ EOF
   then
     echo "$volumes" >> compose.yaml
   fi
-   if [ ! -z "$porti" ]
-  then
-    tee <<-EOF >> compose.yaml
+  tee <<-EOF >> compose.yaml
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
-EOF
-  fi
-
-tee <<-EOF >> compose.yaml
     networks:
-      - $dockernet
+      - ibranet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 $extrapayload
 networks:
-  $dockernet:
+  ibranet:
     driver: bridge
     external: true
 EOF
@@ -387,13 +379,13 @@ services:
     ports:
       - \${PORTE:?err}:\${PORTI:?err}
     networks:
-      - $dockernet
+      - ibranet
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined
 
 networks:
-  $dockernet:
+  ibranet:
     driver: bridge
     external: true
 EOF

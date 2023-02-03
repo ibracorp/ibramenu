@@ -72,7 +72,7 @@ services:
     env_file:
       - .env
     networks:
-      - $dockernet
+      - ibranet
   redis:
     image: redis:alpine
     restart: unless-stopped
@@ -86,7 +86,7 @@ services:
       retries: 5
       timeout: 3s
     networks:
-      - $dockernet
+      - ibranet
   server:
     image: \${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:\${AUTHENTIK_TAG:-2022.7.2}
     restart: unless-stopped
@@ -110,7 +110,7 @@ services:
       - "0.0.0.0:${AUTHENTIK_PORT_HTTP:-9000}:9000"
       - "0.0.0.0:${AUTHENTIK_PORT_HTTPS:-9443}:9443"
     networks:
-      - $dockernet
+      - ibranet
     labels:
       traefik.enable: true
       traefik.http.routers.authentik.entryPoints: https
@@ -138,7 +138,7 @@ services:
     env_file:
       - .env
     networks:
-      - $dockernet
+      - ibranet
 #  geoipupdate:
 #    image: "maxmindinc/geoipupdate:latest"
 #    container_name: authentik-geoip
@@ -152,14 +152,14 @@ services:
 #    env_file:
 #      - .env
 #    networks:
-#      - $dockernet
+#      - ibranet
 volumes:
   database:
     driver: local
   geoip:
     driver: local
 networks:
-  $dockernet:
+  ibranet:
     driver: bridge
     external: true
 EOF

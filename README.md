@@ -6,17 +6,12 @@ IBRAMENU
 [![Ubuntu](https://img.shields.io/badge/Works%20best%20with-Ubuntu-E95420?style=plastic&logo=ubuntu&logoColor=white)](https://ubuntu.com)
 [![IBRADOCS](https://img.shields.io/badge/IBRA-Docs-blue?style=plastic)](https://docs.ibracorp.io)
 
-This README is a work in progress and awaiting other tasks before being completed.
+This README is a work in progress and awaiting other tasks before being completed. 
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
-Clone repo to "/opt/ibracorp/ibramenu/" and run the ibrainit.sh file.
-After it finishes,  reboot.
-Open the ibramenu and choose option 2, then option 1 "all steps in one"
-EX: ```sudo git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
-
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
-Make Request at this link: "https://feedback.ibracorp.io/ibramenu
+
 **Want to Support Us and Get Perks?** <br>
 [![Supporter](https://img.shields.io/badge/Become%20a-Supporter-brightgreen?style=plastic)](https://ibramenu.io/store/)
 

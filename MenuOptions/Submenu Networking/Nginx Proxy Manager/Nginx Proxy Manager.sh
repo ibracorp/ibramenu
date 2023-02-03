@@ -32,7 +32,7 @@ services:
       - '81:81'
       - '443:443'
     networks:
-      - $dockernet
+      - ibranet
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
@@ -41,7 +41,7 @@ services:
       - apparmor:unconfined
 
 networks:
-  $dockernet:
+  ibranet:
     driver: bridge
     external: true
 EOF
