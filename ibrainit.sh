@@ -104,7 +104,7 @@ EOF
 # Launch IBRAINSTALL
 install () {
   mkdir -p /opt/ibracorp
-  # wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
+  wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
   /opt/ibracorp/ibramenu/ibrainstall.sh $1
 }
 
