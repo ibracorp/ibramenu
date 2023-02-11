@@ -9,7 +9,7 @@
 
 sudo bash -c "rm -R /opt/ibracorp/ibramenu/"
 sudo bash -c "git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu"
-cd find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+sudo find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
