@@ -105,7 +105,8 @@ EOF
 install () {
   mkdir -p /opt/ibracorp
   wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/taos15/ibramenu/dev/ibrainstall.sh
-  /opt/ibracorp/ibramenu/ibrainstall.sh $1
+  chmod +x /opt/ibracorp/ibrainstall.sh
+  /opt/ibracorp/ibrainstall.sh $1
 }
 
 # Execute
@@ -120,4 +121,4 @@ then
 fi
 checklist
 install $1
-source /opt/ibracorp/ibramenu/ibrainstall.sh
+
