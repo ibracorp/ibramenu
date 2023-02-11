@@ -121,4 +121,6 @@ then
 fi
 checklist
 install $1
+# cleanup the initial ibrainstall
+rm /opt/ibracorp/ibrainstall.sh
 
