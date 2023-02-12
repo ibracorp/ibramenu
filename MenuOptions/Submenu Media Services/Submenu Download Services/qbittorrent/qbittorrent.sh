@@ -20,7 +20,7 @@ tp_app="qbittorrent"                                # Theme Park App Name
 porte=""                                   # External Port
 porti=""                                   # Internal Port
 extrapayload="    ports:
-      - 8081:8080
+      - 8080:8080
       - 6881:6881
       - 6881:6881/udp"                                # Extra Payload to add to the Compose
 
