@@ -10,10 +10,13 @@ This README is a work in progress and awaiting other tasks before being complete
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
-Clone repo to "/opt/ibracorp/ibramenu/" and run the ibrainit.sh file.
-After it finishes,  reboot.
-Open the ibramenu and choose option 2, then option 1 "all steps in one"
-EX: ```sudo git clone -b dev --single-branch https://github.com/taos15/ibramenu.git /opt/ibracorp/ibramenu```
+Install just IBRAMENU
+
+As root user
+```wget -qO ./i https://raw.githubusercontent.com/taos15/ibramenu/main/ibrainit.sh && chmod +x i && ./i```
+
+As non root user
+```sudo wget -qO ./i https://raw.githubusercontent.com/taos15/ibramenu/main/ibrainit.sh && sudo chmod +x i && sudo ./i```
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 Make Request at this link: "https://feedback.ibracorp.io/ibramenu
