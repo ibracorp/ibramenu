@@ -10,14 +10,15 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # App Info
-app="overseerr"                                 # App Name
-title="Overseerr"                               # Readable App Title
-image="lscr.io/linuxserver/overseerr:latest"    # Image and Tag
+app="jellyseerr"                                 # App Name
+title="jellyseerr"                               # Readable App Title
+image="fallenbagel/jellyseerr:latest"    # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
 porte="5055"                                    # External Port
 porti="5055"                                    # Internal Port
-extrapayload=""                                 # Extra Payload to add to the Compose
+extrapayload="    environment:
+            - JELLYFIN_TYPE=emby"     #comment if using jellyfin                            # Extra Payload to add to the Compose
 
 # Execute
 app
