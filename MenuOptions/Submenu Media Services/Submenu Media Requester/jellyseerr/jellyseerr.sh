@@ -14,7 +14,7 @@ app="jellyseerr"                                 # App Name
 title="jellyseerr"                               # Readable App Title
 image="fallenbagel/jellyseerr:latest"    # Image and Tag
 volumes="    volumes:
-      - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
+      - /opt/appdata/\${APP_NAME:?err}:/app/config" # Volumes
 porte="5055"                                    # External Port
 porti="5055"                                    # Internal Port
 extrapayload="    environment:
