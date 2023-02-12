@@ -14,7 +14,8 @@ app="unpackerr"                                  # App Name
 title="unpackerr"                                # Readable App Title
 image="golift/unpackerr"     # Image and Tag
 volumes="    volumes:
-      - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
+      - /opt/appdata/\${APP_NAME:?err}:/config
+      - /mnt/media:/media" # Volumes
 tp_app="unpackerr"                               # Theme Park App Name
 porte=""                                    # External Port
 porti=""                                    # Internal Port
