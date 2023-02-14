@@ -104,7 +104,7 @@ EOF
 # Launch IBRAINSTALL
 install () {
   mkdir -p /opt/ibracorp
-  wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/taos15/ibramenu/dev/ibrainstall.sh
+  wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/taos15/ibramenu/main/ibrainstall.sh
   chmod +x /opt/ibracorp/ibrainstall.sh
   /opt/ibracorp/ibrainstall.sh $1
 }
