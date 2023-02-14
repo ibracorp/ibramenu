@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################
 # Title   : Reboot
-# By      : DiscDuck
+# By      : DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################
@@ -12,7 +12,7 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 ibralogo
 msgbox "System Reboot"
 read -p "Are you sure? " -n 1 -r
-echo    
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     reboot

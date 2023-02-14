@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################
 # Title   : Install Plex
-# By      : DiscDuck
+# By      : DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################
@@ -44,7 +44,7 @@ services:
     volumes:
       - /opt/appdata/plex/config:/config
       - /opt/appdata/plex/transcode:/transcode
-      - /mnt/media:/media      
+      - /mnt/media:/media
     restart: unless-stopped
     security_opt:
       - apparmor:unconfined

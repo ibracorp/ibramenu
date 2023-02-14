@@ -2,7 +2,7 @@
 
 ######################################################################
 # Title   : Install Watchtower on schedule
-# By      : DiscDuck
+# By      : DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP   ^d
 ######################################################################
@@ -35,7 +35,7 @@ services:
       - WATCHTOWER_INCLUDE_RESTARTING=true
       - WATCHTOWER_INCLUDE_STOPPED=true
       - WATCHTOWER_SCHEDULE=0 0 3 * * *
-      - WATCHTOWER_TIMEOUT=30  
+      - WATCHTOWER_TIMEOUT=30
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
