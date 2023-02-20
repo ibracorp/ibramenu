@@ -41,8 +41,8 @@ extrapayload="    ports:
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
     command: --api.insecure=true --providers.docker
     environment:
-      - CF_DNS_API_TOKEN=\$CF_API_TOKEN
-      - CF_API_EMAIL=\${YOUREMAIL}
+      - CF_DNS_API_TOKEN=$CF_API_TOKEN
+      - CF_API_EMAIL=${YOUREMAIL}
 
     "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
