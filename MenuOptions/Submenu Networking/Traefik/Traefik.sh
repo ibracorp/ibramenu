@@ -131,7 +131,7 @@ providers:
     watch: true
     network: ${dockernet} # Add Your Docker Network Name Here
     # Default host rule to containername.domain.example
-    defaultRule: "Host(`{{ index .Labels \"com.docker.compose.service\"}}.YOURDOMAIN.COM`)" # Make sure to check the guide if it is blank
+    defaultRule: "Host(\`{{ index .Labels \"com.docker.compose.service\"}}.${YOURDOMAIN}\`)" # Make sure to check the guide if it is blank
     swarmModeRefreshSeconds: 15s
     exposedByDefault: false
     #endpoint: "tcp://Dockerproxy:2375" # Uncomment if you are using docker socket proxy
@@ -170,7 +170,7 @@ http:
   #   homeassistant:
   #     entryPoints:
   #       - https
-  #     rule: "Host(`homeassistant.${YOURDOMAIN}`)" # make sure to chek the guide if and add your domain if blank
+  #     rule: "Host(\`homeassistant.${YOURDOMAIN}\`)" # make sure to chek the guide if and add your domain if blank
   #     service: homeassistant
   #     middlewares:
   #       - "auth"
