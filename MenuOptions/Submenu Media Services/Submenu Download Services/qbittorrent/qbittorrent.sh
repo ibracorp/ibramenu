@@ -12,17 +12,14 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 # App Info
 app="qbittorrent"                                  # App Name
 title="qbittorrent"                                # Readable App Title
-image="lscr.io/linuxserver/qbittorrent:latest"     # Image and Tag
+image="cr.hotio.dev/hotio/qbittorrent"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config
       - /mnt/media:/media"                     # Volumes
 tp_app="qbittorrent"                                # Theme Park App Name
-porte=""                                   # External Port
-porti=""                                   # Internal Port
-extrapayload="    ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp"                                # Extra Payload to add to the Compose
+porte="8080"                                   # External Port
+porti="8080"                                   # Internal Port
+extrapayload=""                                # Extra Payload to add to the Compose
 
 # Execute
 app
