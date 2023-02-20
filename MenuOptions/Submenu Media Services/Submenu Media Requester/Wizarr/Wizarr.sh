@@ -15,8 +15,8 @@ title="wizarr"                               # Readable App Title
 image="ghcr.io/wizarrrr/wizarr"    # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/data/database" # Volumes
-porte="5056"                                    # External Port
-porti="5055"                                    # Internal Port
+porte="5690"                                    # External Port
+porti="5690"                                    # Internal Port
 extrapayload="    environment:
       - APP_URL=https://wizarr.domain.com
       - DISABLE_BUILTIN_AUTH=false
