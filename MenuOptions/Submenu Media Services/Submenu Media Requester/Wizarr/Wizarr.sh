@@ -23,7 +23,7 @@ extrapayload="    environment:
 #     labels:
 #       - traefik.enable=true
 #       - traefik.http.routers.wizarr.entrypoints=https
-#       - traefik.http.routers.wizarr.rule=Host(\`wizarr.\${YOURDOMAIN}\`)
+#       - traefik.http.routers.wizarr.rule=Host(\`wizarr.\${YOURDOMAIN}\`)"
 
 
 # Execute
