@@ -9,7 +9,7 @@
 read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
-mkdir -p /opt/appdata/Traefik
+sudo mkdir -p /opt/appdata/Traefik
 tee <<-EOF > /opt/appdata/Traefik/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=${YOURDOMAIN}
@@ -17,7 +17,7 @@ EMAIL=$YOUREMAIL
 EOF
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
-source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh
+# source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh
 # Traefik config
 
 # App Info
@@ -35,7 +35,7 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      - traefik.http.routers.api.rule="Host(`traefik.${YOURDOMAIN}`)"    # Define the subdomain for the traefik dashboard add you doamin to the end.
+      - traefik.http.routers.api.rule=Host(`traefik.${YOURDOMAIN}`)    # Define the subdomain for the traefik dashboard add you doamin to the end.
       #- traefik.http.middlewares.traefik-auth.basicauth.users=USER:BASIC_AUTH_PASSWORD # use htpasswd -c /path/to/passwdfile username in the command line to create a use:passwrd
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
