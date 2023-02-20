@@ -10,16 +10,11 @@ read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
 sudo mkdir -p /opt/appdata/Traefik
-tee <<-EOF > /opt/appdata/Traefik/.traefik.env
+tee <<-EOF > /opt/appdata/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=${YOURDOMAIN}
 EMAIL=$YOUREMAIL
 EOF
-# add variables to inbrafunc
-echo "/opt/appdata/Traefik/.traefik.env " > "/opt/appdata/.traefik.env"
-
-
-
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 # source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh

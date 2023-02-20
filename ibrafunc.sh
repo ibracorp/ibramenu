@@ -122,7 +122,6 @@ environment_check () {
   if [ ! -d "/opt/appdata" ]
   then
     mkdir -p /opt/appdata
-    sudo touch /opt/appdata/.traefik.env
   fi
   # Timezone
   if [ ! -f "/opt/appdata/.timezone.env" ]
@@ -134,6 +133,11 @@ environment_check () {
   then
     echo "PUID=1000" > "/opt/appdata/.id.env"
     echo "PGID=1000" >> "/opt/appdata/.id.env"
+  fi
+  # traefik environment
+  if [ ! -f "/opt/appdata/.traefik.env" ]
+  then
+    echo " " > "/opt/appdata/.traefik.env"
   fi
   # theme.park
   if [ ! -f "/opt/appdata/.themepark.env" ]
