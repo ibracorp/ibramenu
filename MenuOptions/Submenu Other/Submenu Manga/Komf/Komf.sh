@@ -1,6 +1,6 @@
 #!/bin/bash
 ######################################################################
-# Title   : Install Komga
+# Title   : Install Komf
 # By      : DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
@@ -26,8 +26,8 @@ porte="8089"                                    # External Port
 porti="8085"                                    # Internal Port
 extrapayload="    environment: # optional env config
       - KOMF_KOMGA_BASE_URI=http://komga:8085
-      - KOMF_KOMGA_USER=$email
-      - KOMF_KOMGA_PASSWORD=$passwd
+      - KOMF_KOMGA_USER=\$email
+      - KOMF_KOMGA_PASSWORD=\$passwd
       - KOMF_LOG_LEVEL=INFO
       - KOMF_SERVER_PORT=8089"                                 # Extra Payload to add to the Compose
 
