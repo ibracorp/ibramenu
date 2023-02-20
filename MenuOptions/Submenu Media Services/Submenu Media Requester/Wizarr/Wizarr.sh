@@ -18,17 +18,13 @@ volumes="    volumes:
 porte="5690"                                    # External Port
 porti="5690"                                    # Internal Port
 extrapayload="    environment:
-      - APP_URL=https://wizarr.domain.com
+      - APP_URL=https://wizarr.\${YOURDOMAIN}
       - DISABLE_BUILTIN_AUTH=false
 #     labels:
-#   - traefik.enable=true
-#   ## HTTP Routers
-#   - traefik.http.routers.wizarr-rtr.entrypoints=https
-#   - traefik.http.routers.wizarr-rtr.rule=Host(\`wizarr.\${YOURDOMAIN}\`)
-#   - traefik.http.routers.wizarr-rtr.tls=true
-#   ## HTTP Services
-#   - traefik.http.routers.wizarr-rtr.service=wizarr-svc
-#   - traefik.http.services.wizarr-svc.loadbalancer.server.port=5690"
+#       - traefik.enable=true
+#       - traefik.http.routers.wizarr.entrypoints=https
+#       - traefik.http.routers.wizarr.rule=Host(\`wizarr.\${YOURDOMAIN}\`)
+
 
 # Execute
 app

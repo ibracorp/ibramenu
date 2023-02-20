@@ -15,6 +15,11 @@ CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=${YOURDOMAIN}
 EMAIL=$YOUREMAIL
 EOF
+# add variables to inbrafunc
+echo "/opt/appdata/Traefik/.traefik.env " > "/opt/appdata/.traefik.env"
+
+
+
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 # source /opt/ibracorp/ibramenu/MenuOptions/Submenu Networking/Dockerproxy/Dockerproxy.sh

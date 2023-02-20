@@ -122,6 +122,7 @@ environment_check () {
   if [ ! -d "/opt/appdata" ]
   then
     mkdir -p /opt/appdata
+    sudo touch /opt/appdata/.traefik.env
   fi
   # Timezone
   if [ ! -f "/opt/appdata/.timezone.env" ]
@@ -141,6 +142,7 @@ environment_check () {
     echo "TP_THEME=plex" >> "/opt/appdata/.themepark.env"
   fi
 }
+
 
 # launch docker compose container
 launchdocker () {
@@ -227,6 +229,7 @@ services:
     env_file:
       - /opt/appdata/.id.env
       - /opt/appdata/.timezone.env
+      - /opt/appdata/.traefik.env
 EOF
   if [ ! -z "$tp_app" ]
   then
