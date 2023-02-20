@@ -21,7 +21,8 @@ install_docker () {
 }
 
 create_docker_network () {
-  read -p "Enter the name of your custome docker network (ex. ibranet) : " customnetwork
+  read -p "Choose the name for your custome docker network (ex. ibranet) : " customnetwork
+  customnetwork=${customnetwork:-ibranet}
   echo "dockernet=$customnetwork" >> /opt/ibracorp/ibramenu/.profile
   docker network create $customnetwork > /dev/null 2>&1
 }
