@@ -166,21 +166,21 @@ http:
 
   # EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##cd ..
   routers:
-    # Homeassistant routing example - Remove if not used
-    homeassistant:
-      entryPoints:
-        - https
-      rule: "Host(`homeassistant.${YOURDOMAIN}`)" # make sure to chek the guide if and add your domain if blank
-      service: homeassistant
-      middlewares:
-        - "auth"
-  ## SERVICES EXAMPLE ##
-  services:
-    # Homeassistant service example - Remove if not used
-    homeassistant:
-      loadBalancer:
-        servers:
-          - url: http://192.168.60.5:8123/
+  #   # Homeassistant routing example - Remove if not used
+  #   homeassistant:
+  #     entryPoints:
+  #       - https
+  #     rule: "Host(`homeassistant.${YOURDOMAIN}`)" # make sure to chek the guide if and add your domain if blank
+  #     service: homeassistant
+  #     middlewares:
+  #       - "auth"
+  # ## SERVICES EXAMPLE ##
+  # services:
+  #   # Homeassistant service example - Remove if not used
+  #   homeassistant:
+  #     loadBalancer:
+  #       servers:
+  #         - url: http://192.168.60.5:8123/
 
   ## MIDDLEWARES ##
   middlewares:
@@ -191,27 +191,27 @@ http:
           - 127.0.0.1/32 # localhost
           - 192.168.1.1/24 # LAN Subnet
 
-    # Authelia guard
-    auth:
-      forwardauth:
-        address: http://auth:9091/api/verify?rd=https://auth.${YOURDOMAIN}/ # replace auth with your authelia container name
-        trustForwardHeader: true
-        authResponseHeaders:
-          - Remote-User
-          - Remote-Groups
-          - Remote-Name
-          - Remote-Email
+    # # Authelia guard
+    # auth:
+    #   forwardauth:
+    #     address: http://auth:9091/api/verify?rd=https://auth.${YOURDOMAIN}/ # replace auth with your authelia container name
+    #     trustForwardHeader: true
+    #     authResponseHeaders:
+    #       - Remote-User
+    #       - Remote-Groups
+    #       - Remote-Name
+    #       - Remote-Email
 
-    # Authelia basic auth guard
-    auth-basic:
-      forwardauth:
-        address: http://auth:9091/api/verify?auth=basic # replace auth with your authelia container name
-        trustForwardHeader: true
-        authResponseHeaders:
-          - Remote-User
-          - Remote-Groups
-          - Remote-Name
-          - Remote-Email
+    # # Authelia basic auth guard
+    # auth-basic:
+    #   forwardauth:
+    #     address: http://auth:9091/api/verify?auth=basic # replace auth with your authelia container name
+    #     trustForwardHeader: true
+    #     authResponseHeaders:
+    #       - Remote-User
+    #       - Remote-Groups
+    #       - Remote-Name
+    #       - Remote-Email
 
     # Security headers
     securityHeaders:
