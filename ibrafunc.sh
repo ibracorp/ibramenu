@@ -170,7 +170,7 @@ readme () {
 # check if ibramenu is up-to-date
 checkupdate () {
   version=$(cat "/opt/ibracorp/ibramenu/version")
-  current=$(curl -s https://raw.githubusercontent.com/taos15/ibramenu/main/version)
+  current=$(curl -s https://raw.githubusercontent.com/ibracorp/ibramenu/main/version)
   if [ ! $version = $current ]
   then
     msgbox "You IBRAMENU is not up-to-date. Use 'ibraupdate' to update."
@@ -348,7 +348,7 @@ sections:
       - title: GitHub
         description: IBRAMENU on GitHub
         icon: favicon
-        url: https://github.com/taos15/ibramenu
+        url: https://github.com/ibracorp/ibramenu
       - title: Feedback
         description: IBRAMENU Feedback and Voting
         icon: https://ibracorp.io/favicon.ico

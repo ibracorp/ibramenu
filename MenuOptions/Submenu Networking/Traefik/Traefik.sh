@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################
 # Title   : Install Komga
-# By      : taos15
+# By      : DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################
