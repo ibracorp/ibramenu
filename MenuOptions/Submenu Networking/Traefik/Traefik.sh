@@ -35,7 +35,7 @@ extrapayload="    ports:
       - 80:80
       - 8080:8080
     labels:
-      - traefik.http.routers.api.rule=Host(`traefik.${YOURDOMAIN}`)    # Define the subdomain for the traefik dashboard add you doamin to the end.
+      - "traefik.http.routers.api.rule=Host(`traefik.${YOURDOMAIN}`)"    # Define the subdomain for the traefik dashboard add you doamin to the end.
       #- traefik.http.middlewares.traefik-auth.basicauth.users=USER:BASIC_AUTH_PASSWORD # use htpasswd -c /path/to/passwdfile username in the command line to create a use:passwrd
       - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
       - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
@@ -58,7 +58,7 @@ sudo chmod 600 /opt/appdata/Traefik/acme.json
 
 # # Create the config files
 
-tee <<-EOF > /opt/appdata/Traefik/traefik.yml
+sudo tee <<-EOF > /opt/appdata/Traefik/traefik.yml
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
@@ -161,10 +161,10 @@ certificatesResolvers:
           - "1.0.0.1:53"
 EOF
 
-tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
+sudo tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
 http:
 
-  # EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##
+  # EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##cd ..
   routers:
     # Homeassistant routing example - Remove if not used
     homeassistant:
