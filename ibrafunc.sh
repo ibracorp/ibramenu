@@ -10,6 +10,7 @@
 
 # profile file
 source /opt/ibracorp/ibramenu/.profile
+source /opt/appdata/.traefik.env
 # message box
 msgbox () {
   # function expects a message and optional parameters
