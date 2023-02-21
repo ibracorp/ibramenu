@@ -18,7 +18,7 @@ As non root user
 `sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh && sudo chmod +x i && sudo ./i`
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
-Make requests here: "https://feedback.ibracorp.io/ibramenu
+Make requests here: https://feedback.ibracorp.io/ibramenu
 
 **Want to Support Us and Get Perks?** <br>
 [![Supporter](https://img.shields.io/badge/Become%20a-Supporter-brightgreen?style=plastic)](https://ibramenu.io/store/)
