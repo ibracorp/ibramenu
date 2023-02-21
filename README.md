@@ -10,7 +10,6 @@ This README is a work in progress and awaiting other tasks before being complete
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
 **HOW TO INSTALL** <br>
-Install just IBRAMENU
 
 As root user
 `wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh && chmod +x i && ./i`
@@ -19,7 +18,8 @@ As non root user
 `sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh && sudo chmod +x i && sudo ./i`
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
-Make Request at this link: "https://feedback.ibracorp.io/ibramenu
+Make requests here: "https://feedback.ibracorp.io/ibramenu
+
 **Want to Support Us and Get Perks?** <br>
 [![Supporter](https://img.shields.io/badge/Become%20a-Supporter-brightgreen?style=plastic)](https://ibramenu.io/store/)
 
