@@ -18,7 +18,7 @@ volumes="    volumes:
 porte="5056"                                    # External Port
 porti="5055"                                    # Internal Port
 extrapayload="    environment:
-            - JELLYFIN_TYPE=emby"     #comment if using jellyfin                            # Extra Payload to add to the Compose
+      - JELLYFIN_TYPE=emby"     #comment if using jellyfin                            # Extra Payload to add to the Compose
 
 # Execute
 app

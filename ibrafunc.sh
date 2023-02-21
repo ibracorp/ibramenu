@@ -134,6 +134,11 @@ environment_check () {
     echo "PUID=1000" > "/opt/appdata/.id.env"
     echo "PGID=1000" >> "/opt/appdata/.id.env"
   fi
+  # traefik environment
+  if [ ! -f "/opt/appdata/.traefik.env" ]
+  then
+    echo " " > "/opt/appdata/.traefik.env"
+  fi
   # theme.park
   if [ ! -f "/opt/appdata/.themepark.env" ]
   then
@@ -141,6 +146,7 @@ environment_check () {
     echo "TP_THEME=plex" >> "/opt/appdata/.themepark.env"
   fi
 }
+
 
 # launch docker compose container
 launchdocker () {
@@ -227,6 +233,7 @@ services:
     env_file:
       - /opt/appdata/.id.env
       - /opt/appdata/.timezone.env
+      - /opt/appdata/.traefik.env
 EOF
   if [ ! -z "$tp_app" ]
   then
