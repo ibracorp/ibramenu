@@ -29,9 +29,9 @@ extrapayload="    environment:
 
 # Execute
 app
-sudo touch /opt/appdata/\${APP_NAME:?err}/wg0.conf
+sudo touch /opt/appdata/qbittorrent-vpn/wg0.conf
 
-sudo tee <<-EOF > /opt/appdata/\${APP_NAME:?err}/wg0.conf
+sudo tee <<-EOF > /opt/appdata/qbittorrent-vpn/wg0.conf
 [Interface]
 PrivateKey = supersecretprivatekey
 Address = xx.xx.xxx.xxx/32
