@@ -12,7 +12,7 @@
 source /opt/ibracorp/ibramenu/.profile
 source /opt/appdata/.traefik.env
 # message box
-msgbox () {
+msgbox() {
   # function expects a message and optional parameters
   # msgbox <Text> <width of box> <horizontal character for the box> <vertical character for the box>
   # If the box parameters are not given the full width will be used and = for horizontal and | for vertical character
@@ -43,10 +43,10 @@ msgbox () {
   fi
   # calculating message box parameters
   msg_length=${#message}
-  msg_half=$(( $msg_length / 2 ))
-  msg_start=$(( ( ( $box_width - 2 ) / 2 ) - $msg_half ))
-  msg_fill_left=$(( $msg_start ))
-  msg_fill_right=$(( ( $box_width - 2 ) - $msg_start - $msg_length ))
+  msg_half=$(($msg_length / 2))
+  msg_start=$(((($box_width - 2) / 2) - $msg_half))
+  msg_fill_left=$(($msg_start))
+  msg_fill_right=$((($box_width - 2) - $msg_start - $msg_length))
   # generating strings for box
   box_outline_hor=$(printf %"$box_width"s | tr ' ' "$box_hor")
   msg_space_left=$(printf %"$msg_fill_left"s)
@@ -60,7 +60,7 @@ msgbox () {
 }
 
 # ibracorp logo
-ibralogo () {
+ibralogo() {
   version=$(cat "/opt/ibracorp/ibramenu/version")
   tput clear
   tput bold
@@ -72,20 +72,18 @@ ibralogo () {
   | || |_) |  _ <  / ___ \ |__| |_| |  _ <|  __/  Public
  |___|____/|_| \_\/_/   \_\____\___/|_| \_\_|     Version $version
 
-$(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
+$(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk '{print $2}') | IP: $(hostname -I | awk '{print $1}') | RAM: $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
 Become a Member and sponsor us: https://ibracorp.io/memberships
 EOF
   tput sgr0
 }
 
 # disclaimer
-disclaimer () {
+disclaimer() {
   ibralogo
 
-  if [ -f "/opt/ibracorp/IBRADISCLAIMER" ]
-  then
-    if grep -q "IBRADISCLAIMER=accepted" "/opt/ibracorp/IBRADISCLAIMER"
-    then
+  if [ -f "/opt/ibracorp/IBRADISCLAIMER" ]; then
+    if grep -q "IBRADISCLAIMER=accepted" "/opt/ibracorp/IBRADISCLAIMER"; then
       :
       # Has already been accepted
     else
@@ -100,57 +98,51 @@ EOF
     read -p "Do you accept our Disclaimer? y/N: " accept
 
     case "$accept" in
-      [yY])
-        echo "Thank you for accepting the IBRACORP Disclaimer."
-        echo
-        stamp=$(date)
-        tee <<-EOF > /opt/ibracorp/IBRADISCLAIMER
+    [yY])
+      echo "Thank you for accepting the IBRACORP Disclaimer."
+      echo
+      stamp=$(date)
+      tee <<-EOF >/opt/ibracorp/IBRADISCLAIMER
 IBRADISCLAIMER=accepted
 $stamp
 EOF
-          ;;
-      *)
-        echo "IBRACROP Disclaimer has not been accepted. Exiting..."
-        echo
-        exit 0
-          ;;
+      ;;
+    *)
+      echo "IBRACROP Disclaimer has not been accepted. Exiting..."
+      echo
+      exit 0
+      ;;
     esac
   fi
 }
 
-environment_check () {
+environment_check() {
   # Check for environment files or otherwise create them with defaults
-  if [ ! -d "/opt/appdata" ]
-  then
+  if [ ! -d "/opt/appdata" ]; then
     mkdir -p /opt/appdata
   fi
   # Timezone
-  if [ ! -f "/opt/appdata/.timezone.env" ]
-  then
-    echo "TZ=UTC" > "/opt/appdata/.timezone.env"
+  if [ ! -f "/opt/appdata/.timezone.env" ]; then
+    echo "TZ=UTC" >"/opt/appdata/.timezone.env"
   fi
   # PUID and PGID
-  if [ ! -f "/opt/appdata/.id.env" ]
-  then
-    echo "PUID=1000" > "/opt/appdata/.id.env"
-    echo "PGID=1000" >> "/opt/appdata/.id.env"
+  if [ ! -f "/opt/appdata/.id.env" ]; then
+    echo "PUID=1000" >"/opt/appdata/.id.env"
+    echo "PGID=1000" >>"/opt/appdata/.id.env"
   fi
   # traefik environment
-  if [ ! -f "/opt/appdata/.traefik.env" ]
-  then
-    echo " " > "/opt/appdata/.traefik.env"
+  if [ ! -f "/opt/appdata/.traefik.env" ]; then
+    echo " " >"/opt/appdata/.traefik.env"
   fi
   # theme.park
-  if [ ! -f "/opt/appdata/.themepark.env" ]
-  then
-    echo "DOCKER_MODS=ghcr.io/gilbn/theme.park:\${TP_APP}" > "/opt/appdata/.themepark.env"
-    echo "TP_THEME=plex" >> "/opt/appdata/.themepark.env"
+  if [ ! -f "/opt/appdata/.themepark.env" ]; then
+    echo "DOCKER_MODS=ghcr.io/gilbn/theme.park:\${TP_APP}" >"/opt/appdata/.themepark.env"
+    echo "TP_THEME=plex" >>"/opt/appdata/.themepark.env"
   fi
 }
 
-
 # launch docker compose container
-launchdocker () {
+launchdocker() {
   target_folder=$1
   if [ ! -d $target_folder ]; then
     mkdir -p "$target_folder"
@@ -160,13 +152,11 @@ launchdocker () {
 }
 
 # display README.md
-readme () {
-  if [ -f "README.md" ]
-  then
+readme() {
+  if [ -f "README.md" ]; then
     mdless -P "README.md"
     read -p "Do you want to continue (y)? " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
       return
     else
       return 1
@@ -175,19 +165,18 @@ readme () {
 }
 
 # check if ibramenu is up-to-date
-checkupdate () {
+checkupdate() {
   version=$(cat "/opt/ibracorp/ibramenu/version")
   current=$(curl -s https://raw.githubusercontent.com/ibracorp/ibramenu/main/version)
-  if [ ! $version = $current ]
-  then
+  if [ ! $version = $current ]; then
     msgbox "You IBRAMENU is not up-to-date. Use 'ibraupdate' to update."
   fi
 }
 
 # IBRACORP motd
-ibramotd () {
+ibramotd() {
   chmod -x /etc/update-motd.d/*
-  tee <<-'EOF' > /etc/update-motd.d/01-ibracorp
+  tee <<-'EOF' >/etc/update-motd.d/01-ibracorp
 #!/bin/bash
 ######################################################################
 # Title   : IBRACORP MOTD
@@ -205,21 +194,21 @@ $(lsb_release -sd) | CPU Threads: $(lscpu | grep "CPU(s):" | tail +1 | head -1 |
 Become a Member and sponsor us: https://ibracorp.io/memberships
 Type 'ibramenu' to launch IBRAMENU.
 EOF
-  echo "EOF" >> /etc/update-motd.d/01-ibracorp
+  echo "EOF" >>/etc/update-motd.d/01-ibracorp
   chmod +x /etc/update-motd.d/01-ibracorp
 }
 
 # App Greetings
-appgreetings () {
+appgreetings() {
   ibralogo
   msgbox "$title Installer"
 }
 
 # App
-appcreate () {
+appcreate() {
   msgbox "Installing $title..."
   mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
-  tee <<-EOF > .env
+  tee <<-EOF >.env
 APP_NAME=$app
 IMAGE=$image
 TP_APP=$tp_app
@@ -230,7 +219,7 @@ PORTI2=$porti2
 PORTE3=$porte3
 PORTI3=$porti3
 EOF
-  tee <<-EOF > compose.yaml
+  tee <<-EOF >compose.yaml
 services:
   service-name:
     image: \${IMAGE:?err}
@@ -240,28 +229,30 @@ services:
       - /opt/appdata/.timezone.env
       - /opt/appdata/.traefik.env
 EOF
-  if [ ! -z "$tp_app" ]
-  then
-    echo "      - /opt/appdata/.themepark.env" >> compose.yaml
+  if [ ! -z "$tp_app" ]; then
+    echo "      - /opt/appdata/.themepark.env" >>compose.yaml
   fi
-  if [ ! -z "$volumes" ]
-  then
-    echo "$volumes" >> compose.yaml
+  if [ ! -z "$volumes" ]; then
+    echo "$volumes" >>compose.yaml
+  fi
   if [ ! -z "$porti" ]; then
-  ports="- \${PORTE:?err}:\${PORTI:?err}"
+    tee <<-EOF >>compose.yaml
+    ports:
+      - \${PORTE:?err}:\${PORTI:?err}
+EOF
+  fi
   if [ ! -z "$porti2" ]; then
-    ports="$ports\n  - \${PORTE2:?err}:\${PORTI2:?err}"
+    tee <<-EOF >>compose.yaml
+      - \${PORTE:?err}:\${PORTI:?err}
+EOF
   fi
   if [ ! -z "$porti3" ]; then
-    ports="$ports\n  - \${PORTE3:?err}:\${PORTI3:?err}"
-  fi
-  tee <<-EOF >> compose.yaml
-    ports:
-$ports
+    tee <<-EOF >>compose.yaml
+      - \${PORTE:?err}:\${PORTI:?err}
 EOF
-fi
+  fi
 
-tee <<-EOF >> compose.yaml
+  tee <<-EOF >>compose.yaml
     networks:
       - $dockernet
     restart: unless-stopped
@@ -277,7 +268,7 @@ EOF
 }
 
 # List Links
-appfinalization () {
+appfinalization() {
   check_ibradashy
   ibralogo
   msgbox "All Done! Here is the link to $title:"
@@ -291,34 +282,31 @@ appfinalization () {
 }
 
 # App Complete
-app () {
+app() {
   appgreetings
   appcreate
   appfinalization
 }
 
 # IBRACORP Dashy
-ibradashy () {
-  if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" > /dev/null 2>&1
-  then
-    position=$(expr $(grep -n "name: IBRAMENU" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 3 )
+ibradashy() {
+  if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" >/dev/null 2>&1; then
+    position=$(expr $(grep -n "name: IBRAMENU" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 3)
     sed -i "$position i \      - title: $title\\
         description: Click to launch $title\\
         icon: favicon\\
         url: http://$ip:$porte" /opt/appdata/ibradashy/conf.yml
-    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
+    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate >/dev/null 2>&1
   fi
 }
 
 # Check IBRACORP Dashy
-check_ibradashy () {
-  if [ ! -d "/opt/appdata/ibradashy" ]
-  then
+check_ibradashy() {
+  if [ ! -d "/opt/appdata/ibradashy" ]; then
     mkdir -p "/opt/appdata/ibradashy"
   fi
-  if [ ! -f "/opt/appdata/ibradashy/.env" ]
-  then
-    tee <<-EOF > "/opt/appdata/ibradashy/.env"
+  if [ ! -f "/opt/appdata/ibradashy/.env" ]; then
+    tee <<-EOF >"/opt/appdata/ibradashy/.env"
 APP_NAME=ibradashy
 IMAGE=lissy93/dashy:latest
 TP_APP=
@@ -326,9 +314,8 @@ PORTE=8086
 PORTI=80
 EOF
   fi
-  if [ ! -f "/opt/appdata/ibradashy/conf.yml" ]
-  then
-    tee <<-EOF > "/opt/appdata/ibradashy/conf.yml"
+  if [ ! -f "/opt/appdata/ibradashy/conf.yml" ]; then
+    tee <<-EOF >"/opt/appdata/ibradashy/conf.yml"
 pageInfo:
   title: IBRACORP
 sections:
@@ -389,9 +376,8 @@ appConfig:
   iconSize: large
 EOF
   fi
-  if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]
-  then
-    tee <<-EOF > "/opt/appdata/ibradashy/compose.yaml"
+  if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]; then
+    tee <<-EOF >"/opt/appdata/ibradashy/compose.yaml"
 services:
   service-name:
     image: \${IMAGE:?err}
@@ -415,9 +401,8 @@ networks:
     external: true
 EOF
   fi
-if [ ! $(docker ps | grep ibradashy) ]
-then
-  msgbox "Installing/Updating IBRADASHY"
-  docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate > /dev/null 2>&1
-fi
+  if [ ! $(docker ps | grep ibradashy) ]; then
+    msgbox "Installing/Updating IBRADASHY"
+    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate >/dev/null 2>&1
+  fi
 }
