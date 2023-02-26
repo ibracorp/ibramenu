@@ -22,16 +22,26 @@ volumes="    volumes:
 tp_app="qbittorrent"                                # Theme Park App Name
 porte="8080"                                   # External Port
 porti="8080"                                   # Internal Port
+porte2="8118"                                   # External Port
+porti2="8118"                                   # Internal Port                                # Internal Port
 extrapayload="    environment:
-      - net.ipv6.conf.all.disable_ipv6=1
+      - VPN_ENABLED=true
+      - VPN_CONF=wg0
+      - PRIVOXY_ENABLED=false
       - VPN_LAN_NETWORK=${IP} 
-      - VPN_ADDITIONAL_PORTS=7878/tcp,9117/tcp " # for additional ports, Ex. Wanting to route traffic from other containers over the vpn
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv6.conf.all.disable_ipv6=1"
+      #  - VPN_ADDITIONAL_PORTS=7878/tcp,9117/tcp  # for additional ports, Ex. Wanting to route traffic from other containers over the vpn
 
 # Execute
 app
-sudo touch /opt/appdata/qbittorrent-vpn/wg0.conf
+sudo mkdir -p /opt/appdata/qbittorrent-vpn/wireguard
+sudo touch /opt/appdata/qbittorrent-vpn/wireguard/wg0.conf
 
-sudo tee <<-EOF > /opt/appdata/qbittorrent-vpn/wg0.conf
+sudo tee <<-EOF > /opt/appdata/qbittorrent-vpn/wireguard/wg0.conf
 [Interface]
 PrivateKey = supersecretprivatekey
 Address = xx.xx.xxx.xxx/32
