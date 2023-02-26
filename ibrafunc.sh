@@ -257,11 +257,10 @@ EOF
   then
     echo "$volumes" >> compose.yaml
   fi
-  # Check if there are more port defined and do a for loop for all the ports and added to the compose file
-  num_ports=10
-   if [ ! -z "$porti" ]; then
+  # Add ports to the compose file
+if [ ! -z "$porti" ]; then
   ports="- \${PORTE:?err}:\${PORTI:?err}"
-  for i in $(seq 2 $num_ports); do
+  for i in $(seq 2 ${num_ports:-10}); do
     port_var="PORTI$i"
     port_name="PORTE$i"
     if [ ! -z "${!port_var}" ]; then
