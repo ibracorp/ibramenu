@@ -220,24 +220,25 @@ appcreate () {
   msgbox "Installing $title..."
   mkdir -p /opt/appdata/$app && cd /opt/appdata/$app
  # Write the variables to .env
-echo "APP_NAME=$app" > .env
-echo "IMAGE=$image" >> .env
-echo "TP_APP=$tp_app" >> .env
-echo "PORTE=${PORTE:?err}" >> .env
-echo "PORTI=${PORTI:?err}" >> .env
+  echo "APP_NAME=$app" > .env
+  echo "IMAGE=$image" >> .env
+  echo "TP_APP=$tp_app" >> .env
+  echo "PORTE=${PORTE:?err}" >> .env
+  echo "PORTI=${PORTI:?err}" >> .env
 
-for (( i=2; i<=$num_ports; i++ )); do
-  # get the port variables dynamically using variable variables
-  porte_var="porte$i"
-  porti_var="porti$i"
+  for (( i=2; i<=$num_ports; i++ )); do
+    # get the port variables dynamically using variable variables
+    porte_var="porte$i"
+    porti_var="porti$i"
 
-  # check if both variables are non-empty
-  if [ ! -z "${!porte_var}" ] && [ ! -z "${!porti_var}" ]; then
-    # write the port variables to the .env file
-    echo "${porte_var^^}=${!porte_var}" >> .env
-    echo "${porti_var^^}=${!porti_var}" >> .env
-  fi
-done
+    # check if both variables are non-empty
+    if [ ! -z "${!porte_var}" ] && [ ! -z "${!porti_var}" ]; then
+      # write the port variables to the .env file
+      echo "${porte_var^^}=${!porte_var}" >> .env
+      echo "${porti_var^^}=${!porti_var}" >> .env
+    fi
+  done 
+
   tee <<-EOF > compose.yaml
 services:
   service-name:
@@ -256,9 +257,10 @@ EOF
   then
     echo "$volumes" >> compose.yaml
   fi
-   if [ ! -z "$porti" ]; then
+  # Add ports to the compose file
+if [ ! -z "$porti" ]; then
   ports="- \${PORTE:?err}:\${PORTI:?err}"
-  for i in $(seq 2 $num_ports); do
+  for i in $(seq 2 ${num_ports:-10}); do
     port_var="PORTI$i"
     port_name="PORTE$i"
     if [ ! -z "${!port_var}" ]; then
@@ -270,6 +272,7 @@ EOF
 $ports
 EOF
 fi
+
 
 tee <<-EOF >> compose.yaml
     networks:
