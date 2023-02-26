@@ -225,6 +225,10 @@ IMAGE=$image
 TP_APP=$tp_app
 PORTE=$porte
 PORTI=$porti
+PORTE2=$porte2
+PORTI2=$porti2
+PORTE3=$porte3
+PORTI3=$porti3
 EOF
   tee <<-EOF > compose.yaml
 services:
@@ -243,14 +247,19 @@ EOF
   if [ ! -z "$volumes" ]
   then
     echo "$volumes" >> compose.yaml
+  if [ ! -z "$porti" ]; then
+  ports="- \${PORTE:?err}:\${PORTI:?err}"
+  if [ ! -z "$porti2" ]; then
+    ports="$ports\n  - \${PORTE2:?err}:\${PORTI2:?err}"
   fi
-   if [ ! -z "$porti" ]
-  then
-    tee <<-EOF >> compose.yaml
+  if [ ! -z "$porti3" ]; then
+    ports="$ports\n  - \${PORTE3:?err}:\${PORTI3:?err}"
+  fi
+  tee <<-EOF >> compose.yaml
     ports:
-      - \${PORTE:?err}:\${PORTI:?err}
+$ports
 EOF
-  fi
+fi
 
 tee <<-EOF >> compose.yaml
     networks:
