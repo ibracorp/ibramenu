@@ -243,12 +243,12 @@ EOF
   fi
   if [ ! -z "$porti2" ]; then
     tee <<-EOF >>compose.yaml
-      - \${PORTE:?err}:\${PORTI:?err}
+      - \${PORTE2:?err}:\${PORTI2:?err}
 EOF
   fi
   if [ ! -z "$porti3" ]; then
     tee <<-EOF >>compose.yaml
-      - \${PORTE:?err}:\${PORTI:?err}
+      - \${PORTE3:?err}:\${PORTI3:?err}
 EOF
   fi
 
