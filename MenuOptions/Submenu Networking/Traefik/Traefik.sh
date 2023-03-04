@@ -152,9 +152,12 @@ certificatesResolvers:
     acme:
       email: ${YOUREMAIL}
       storage: /etc/traefik/acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory # comment this after you are able to get a certificate
+      #caServer: "https://acme-v02.api.letsencrypt.org/directory" # uncomment this after you are able to get a certificate to use in production
       dnsChallenge:
         provider: cloudflare
-        #disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
+        delayBeforeCheck: 60 # comment this after you are able to get a certificate
+        disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
         # Used to make sure the dns challenge is propagated to the rights dns servers
         resolvers:
           - "1.1.1.1:53"
