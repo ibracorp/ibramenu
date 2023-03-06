@@ -176,7 +176,7 @@ http:
     # api:
     #   entryPoints:
     #     - https
-    #   rule: "Host($(traefik.taos15.net))" # make sure to chek the guide if and add your domain if blank
+    #   rule: "Host(\`traefik.${YOURDOMAIN}\`)" # make sure to chek the guide if and add your domain if blank
     #   service: api@internal
     #   middlewares:
     #     - "auth"
