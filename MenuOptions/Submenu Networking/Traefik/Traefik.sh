@@ -34,8 +34,6 @@ extrapayload="    ports:
       - 443:443
       - 80:80
       - 8080:8080
-    labels:
-
     environment:
       - CF_DNS_API_TOKEN=$CF_API_TOKEN
       - CF_API_EMAIL=${YOUREMAIL}
