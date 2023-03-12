@@ -10,7 +10,7 @@ read -p "Your Domain (domain.com)            : " YOURDOMAIN
 read -p "Your cloudflare email             : " YOUREMAIL
 read -p "Your Cloudflare API token           : " CF_API_TOKEN
 sudo mkdir -p /opt/appdata/Traefik
-tee <<-EOF > /opt/appdata/.traefik.env
+tee <<-EOF >/opt/appdata/.traefik.env
 CF_DNS_API_TOKEN=$CF_API_TOKEN
 DOMAIN=${YOURDOMAIN}
 EMAIL=$YOUREMAIL
@@ -21,36 +21,28 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 # Traefik config
 
 # App Info
-app="Traefik"                                  # App Name
-title="Traefik"                                # Readable App Title
-image="traefik:latest"     # Image and Tag
+app="Traefik"          # App Name
+title="Traefik"        # Readable App Title
+image="traefik:latest" # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro" # Volumes
-tp_app=""                               # Theme Park App Name
-porte=""                                    # External Port
-porti=""                                    # Internal Port
+tp_app=""                                             # Theme Park App Name
+porte=""                                              # External Port
+porti=""                                              # Internal Port
 extrapayload="    ports:
       - 443:443
       - 80:80
       - 8080:8080
-    labels:
-      - traefik.http.routers.api.rule=Host(\`traefik.${YOURDOMAIN}\`)    # Define the subdomain for the traefik dashboard add you doamin to the end.
-      #- traefik.http.middlewares.traefik-auth.basicauth.users=USER:BASIC_AUTH_PASSWORD # use htpasswd -c /path/to/passwdfile username in the command line to create a use:passwrd
-      - traefik.http.routers.api.service=api@internal    # Enable Traefik API.
-      - traefik.enable=true   # Enable Traefik reverse proxy for the Traefik dashboard.
-    command: --api.insecure=true --providers.docker
     environment:
       - CF_DNS_API_TOKEN=$CF_API_TOKEN
       - CF_API_EMAIL=${YOUREMAIL}
 
-    "                                 # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
-
+    " # Extra Payload to add to the Compose add 4 spance to the top group for example environment: and 6 for the childs (if copy and pasting you just need to add the space to the parent).
 
 # Execute
 app
 sleep 2
-
 
 #create file for certificates
 sudo touch /opt/appdata/Traefik/acme.json
@@ -58,7 +50,7 @@ sudo chmod 600 /opt/appdata/Traefik/acme.json
 
 # # Create the config files
 
-sudo tee <<-EOF > /opt/appdata/Traefik/traefik.yml
+sudo tee <<-EOF >/opt/appdata/Traefik/traefik.yml
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
@@ -140,7 +132,7 @@ providers:
 # Enable traefik ui
 api:
   dashboard: true
-  insecure: true
+  # insecure: true # uncomment if you want to access the dashboard in the local network, make sure you have some type of auth for the reverse proxy
 
 # Log level INFO|DEBUG|ERROR
 log:
@@ -152,28 +144,41 @@ certificatesResolvers:
     acme:
       email: ${YOUREMAIL}
       storage: /etc/traefik/acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory # comment this after you are able to get a certificate
+      #caServer: "https://acme-v02.api.letsencrypt.org/directory" # uncomment this after you are able to get a certificate to use in production
       dnsChallenge:
         provider: cloudflare
-        #disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
+        delayBeforeCheck: 60 # comment this after you are able to get a certificate
+        disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
         # Used to make sure the dns challenge is propagated to the rights dns servers
         resolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
 EOF
 
-sudo tee <<-EOF > /opt/appdata/Traefik/fileConfig.yml
+sudo tee <<-EOF >/opt/appdata/Traefik/fileConfig.yml
 http:
 
   # EXTERNAL ROUTING EXAMPLE - Only use if you want to proxy something manually ##cd ..
   routers:
-  #   # Homeassistant routing example - Remove if not used
-  #   homeassistant:
-  #     entryPoints:
-  #       - https
-  #     rule: "Host(\`homeassistant.${YOURDOMAIN}\`)" # make sure to chek the guide if and add your domain if blank
-  #     service: homeassistant
-  #     middlewares:
-  #       - "auth"
+    # # Homeassistant routing example - Remove if not used
+    # homeassistant:
+    #   entryPoints:
+    #     - https
+    #   rule: "Host(\`homeassistant.${YOURDOMAIN}\`)" # make sure to chek the guide if and add your domain if blank
+    #   service: homeassistant
+    #   middlewares:
+    #     - "auth"
+
+    #   # api uncomment to reverse proxy the dashboard, this config use authelia
+    # api:
+    #   entryPoints:
+    #     - https
+    #   rule: "Host(\`traefik.${YOURDOMAIN}\`)" # make sure to chek the guide if and add your domain if blank
+    #   service: api@internal
+    #   middlewares:
+    #     - "auth"
+
   # ## SERVICES EXAMPLE ##
   # services:
   #   # Homeassistant service example - Remove if not used
