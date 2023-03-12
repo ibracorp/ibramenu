@@ -12,10 +12,10 @@ sudo bash -c "git clone -b dev --single-branch https://github.com/ibracorp/ibram
 sudo find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # update the custom docker netwrok use in all the containers
-update_docker_network () {
+update_docker_network() {
   read -p "Enter the name of your custome docker network (ex. ibranet) : " customnetwork
-  echo "dockernet=$customnetwork" >> /opt/ibracorp/ibramenu/.profile
-  docker network create $customnetwork > /dev/null 2>&1
+  sed -i "s/^dockernet=.*$/dockernet=$customnetwork/" /opt/ibracorp/ibramenu/.profile
+  docker network create $customnetwork >/dev/null 2>&1
 }
 
 update_docker_network

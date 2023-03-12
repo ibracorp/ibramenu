@@ -16,29 +16,26 @@ check_token="invalid"
 check_access="invalid"
 
 # Check for local token file
-check_token () {
-  if [ -f $tokenfile ]
-  then
+check_token() {
+  if [ -f $tokenfile ]; then
     check_token="valid"
   fi
 }
 
 # Check if token grants access
-check_access () {
+check_access() {
   token=$(cat $tokenfile)
   access=$(curl -u ibracorp:$token -s https://raw.githubusercontent.com/ibracorp/ibramenu-supporter/main/ACCESS | cat)
-  if [ "$access" = "validated" ]
-  then
+  if [ "$access" = "validated" ]; then
     check_access="valid"
   fi
 }
 
 # Become a supporter
-become_a_supporter () {
+become_a_supporter() {
   ibralogo
   echo
-  if [ "$check_token" = "invalid" ]
-  then
+  if [ "$check_token" = "invalid" ]; then
     echo "There is no token set on your system and therefore no"
     echo "access to the IBRAMENU Supporter Menu is available."
   else
@@ -79,26 +76,23 @@ EOF
 }
 
 # Request token and store local
-request_local_token () {
-    read -p "Please enter your personal IBRAMENU Supporter token: " token
-    echo "$token" > "$tokenfile"
+request_local_token() {
+  read -p "Please enter your personal IBRAMENU Supporter token: " token
+  echo "$token" >"$tokenfile"
 }
 
-check () {
+check() {
   check_token
-  if [ $check_token = "valid" ]
-  then
+  if [ $check_token = "valid" ]; then
     check_access
   fi
 }
 
 # Execute
 check
-if [ "$check_token" = "valid" ] && [ "$check_access" = "valid" ]
-then
+if [ "$check_token" = "valid" ] && [ "$check_access" = "valid" ]; then
   ibramenusupporter="/opt/ibracorp/ibramenu-supporter"
-  if [ -d "$ibramenusupporter" ]
-  then
+  if [ -d "$ibramenusupporter" ]; then
     rm -r "$ibramenusupporter"
   fi
   git clone -b main --single-branch https://oauth2:$token@github.com/ibracorp/ibramenu-supporter.git "$ibramenusupporter"
