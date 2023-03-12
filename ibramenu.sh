@@ -31,7 +31,7 @@ menu_from_array() {
       ;;
     b | B)
       if [ "$PWD/" = $menu_entry_point ]; then
-        read -p "Already at Top Menu. Press any key to continue..."
+        read -p "Already at Top Menu. Press enter to continue..."
         break
       else
         cd ..
@@ -62,7 +62,7 @@ execute_script() {
   if [ $? = 0 ]; then
     script_command="./$item.sh"
     "$script_command"
-    read -p "Press any key to continue..."
+    read -p "Press enter to continue..."
   fi
   cd ..
 }

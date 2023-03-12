@@ -28,13 +28,13 @@ volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro" # Volumes
 tp_app=""                                             # Theme Park App Name
-porte=""                                              # External Port
-porti=""                                              # Internal Port
-extrapayload="    ports:
-      - 443:443
-      - 80:80
-      - 8080:8080
-    environment:
+porte="8080"                                          # External Port
+porti="8080"
+porte2="443" # External Port
+porti2="443"
+porte3="80" # External Port
+porti3="80" # Internal Port
+extrapayload="    environment:
       - CF_DNS_API_TOKEN=$CF_API_TOKEN
       - CF_API_EMAIL=${YOUREMAIL}
 
