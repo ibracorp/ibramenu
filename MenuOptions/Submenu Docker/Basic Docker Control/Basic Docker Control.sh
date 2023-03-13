@@ -10,13 +10,13 @@
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 
 # Greetings
-greetings () {
+greetings() {
     ibralogo
     msgbox "Basic Docker Controls"
 }
 
 # Docker Control Menu
-docker_control_menu () {
+docker_control_menu() {
     tee <<-EOF
 Basic Docker Control Menu
 
@@ -27,17 +27,17 @@ Basic Docker Control Menu
 EOF
     read -p "Enter Number (1-3) and press Enter: " choice
     case $choice in
-        1)
-            msgbox "Stopping all Docker Container"
-            docker_control "stop"
-            ;;
-        2)
-            msgbox "Starting all Docker Container"
-            docker_control "up -d"
-            ;;
-        3)
-            msgbox "Execute your own Docker Container command"
-            tee <<-EOF
+    1)
+        msgbox "Stopping all Docker Container"
+        docker_control "stop"
+        ;;
+    2)
+        msgbox "Starting all Docker Container"
+        docker_control "up -d"
+        ;;
+    3)
+        msgbox "Execute your own Docker Container command"
+        tee <<-EOF
 Examples:
 
 config                  = Validate and view the Compose file
@@ -53,17 +53,17 @@ up -d --force-recreate  = Recreate containers
 convert                 = Show compose
 
 EOF
-            read -p "Enter command to be executed (plain and without \")? " docker_command
-            docker_control $docker_command
-            ;;
-        *)
-            echo "Not a valid choice..."
-            ;;
+        read -p "Enter command to be executed (plain and without \")? " docker_command
+        docker_control $docker_command
+        ;;
+    *)
+        echo "Not a valid choice..."
+        ;;
     esac
 }
 
 # Docker Control Execute
-docker_control () {
+docker_control() {
     store_folder=$(pwd)
     cd /opt/appdata
     for file in *; do
