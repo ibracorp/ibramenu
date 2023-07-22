@@ -8,7 +8,7 @@
 ######################################################################
 
 sudo bash -c "rm -R /opt/ibracorp/ibramenu/"
-sudo bash -c "git clone -b dev --single-branch https://github.com/ibracorp/ibramenu.git /opt/ibracorp/ibramenu"
+sudo bash -c "git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git /opt/ibracorp/ibramenu"
 sudo find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
 
 # update the custom docker netwrok use in all the containers
