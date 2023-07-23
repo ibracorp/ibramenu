@@ -18,8 +18,8 @@ install_docker () {
   sudo apt-get install docker-ce docker-ce-cli containerd.io -y
   sudo groupadd docker
   sudo usermod -aG docker $USER && \
-newgrp docker && \
-groups
+  newgrp docker && \
+  groups
 }
 
 create_docker_network () {
