@@ -18,6 +18,7 @@ RUN \
     jq \
     libatomic1 \
     curl \
+    wget \
     ruby \
     nano \
     net-tools \
