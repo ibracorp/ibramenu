@@ -17,6 +17,23 @@ As root user
 As non root user
 `sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh && sudo chmod +x i && sudo ./i`
 
+**Compose File Example** <br>
+```yaml
+---
+services:
+  ibramenu:
+    image: ibramenu:v0.0.0-1alpha
+    container_name: ibramenu
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/EST
+    volumes:
+      - /opt/appdata:/opt/appdata
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+```
+
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 Make requests here: https://feedback.ibracorp.io/ibramenu
 

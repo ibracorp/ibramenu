@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+# make folders
+mkdir -p \
+    /config/log 
+   
+# copy config
+if [[ ! -e /config/config.ini ]]; then
+    cp /defaults/config.ini /config/config.ini
+fi
+
+
+# permissions
+lsiown abc:abc -R \
+    /config \
+    /opt
+
