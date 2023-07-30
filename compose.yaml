@@ -1,0 +1,13 @@
+# This is a example Docker Compose file for the ibramenu service.
+# It defines the configuration to build and run the ibramenu container.
+---
+services:
+  ibramenu:
+    build: .  # The dot "." means the current directory will be used as the build context
+    container_name: ibramenu
+    environment:
+      - TZ=Etc/EST
+    volumes:
+      - /opt/appdata:/opt/appdata
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped

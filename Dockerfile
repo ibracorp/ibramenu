@@ -30,6 +30,9 @@ RUN \
   wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh && \
   chmod +x /opt/ibracorp/ibrainstall.sh && \
   /opt/ibracorp/ibrainstall.sh && \
+  ## overwrite disclaimer
+  touch /opt/ibracorp/IBRADISCLAIMER && \
+  echo IBRADISCLAIMER=accepted > /opt/ibracorp/IBRADISCLAIMER && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \
@@ -41,6 +44,3 @@ RUN \
 
 # add local files
 COPY /root /
-
-# ports and volumes
-EXPOSE 8088
