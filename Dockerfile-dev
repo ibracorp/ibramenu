@@ -1,0 +1,40 @@
+FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG CODE_RELEASE
+LABEL maintainer="taos15"
+
+# environment settings
+ARG DEBIAN_FRONTEND="noninteractive"
+ENV HOME="/config"
+
+COPY . /opt/ibracorp/ibramenu
+RUN \
+  echo "**** install runtime dependencies ****" && \
+  apt-get update && \
+  apt-get install -y \
+    git \
+    jq \
+    libatomic1 \
+    curl \
+    wget \
+    ruby \
+    nano \
+    net-tools \
+    netcat \
+    sudo && \
+    gem install mdless && \ 
+    find /opt/ibracorp/ibramenu -type f -iname "*.sh" -exec chmod +x {} \; && \
+  echo "**** clean up ****" && \
+  apt-get clean && \
+  rm -rf \
+    /config/* \
+    /opt/ibracorp/ibrainstall.sh \
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
+
+# add local files
+COPY /root /
