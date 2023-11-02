@@ -37,7 +37,7 @@ cd ibramenu
 docker compose up -d --build --force-recreate
 ```
 
-### Access the continer
+### Access the container
 
 To generate the docker compose file for your apps you need to run ibramenu from within the container, run the following command.
 
