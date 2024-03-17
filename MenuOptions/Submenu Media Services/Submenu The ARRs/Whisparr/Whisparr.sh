@@ -12,7 +12,7 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 # App Info
 app="whiasparr"                                # App Name
 title="Whisparr"                               # Readable App Title
-image="cr.hotio.dev/hotio/whisparr:nightly"    # Image and Tag
+image="ghcr.io/hotio/whisparr"    # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config
       - /mnt/media:/media"                     # Volumes
