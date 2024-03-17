@@ -47,6 +47,8 @@ docker run -it ibramenu /bin/bash
 
 ### Compose File Example
 
+Change the `/opt/appdata` to the location that you want your docker files to be generated to.
+
 ```yaml
 ---
 services:
@@ -62,6 +64,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 ```
+#### Open Ibramenu inside the container
+- Run the following command to open and shell
+
+```sh
+docker exec -it ibramenu bash
+```
+- In the shell that opens run the following command to start ibramenu
+
+```sh
+ibramenu
+```
+
+
+
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 Make requests here: <https://feedback.ibracorp.io/ibramenu>
