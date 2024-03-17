@@ -9,6 +9,9 @@ if [[ ! -e /config/config.ini ]]; then
     cp /defaults/config.ini /config/config.ini
 fi
 
+# run docker as non-root
+usermod -aG docker abc
+
 
 # permissions
 lsiown abc:abc -R \

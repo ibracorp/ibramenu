@@ -6,8 +6,10 @@ services:
     build: .  # The dot "." means the current directory will be used as the build context
     container_name: ibramenu
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=Etc/EST
     volumes:
-      - /opt/appdata:/opt/appdata
+      # - /opt/appdata:/opt/appdata # Map this volume to where you want to store your docker compose files.
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
