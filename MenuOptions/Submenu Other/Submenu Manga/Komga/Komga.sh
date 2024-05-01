@@ -17,7 +17,7 @@ volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config" # Volumes
 tp_app="Komga"                               # Theme Park App Name
 porte="8085"                                    # External Port
-porti="8080"                                    # Internal Port
+porti="25600"                                    # Internal Port
 extrapayload=""                                 # Extra Payload to add to the Compose
 
 
