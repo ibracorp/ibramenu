@@ -12,7 +12,7 @@ source /opt/ibracorp/ibramenu/ibrafunc.sh
 # App Info
 app="qbittorrent"                                  # App Name
 title="qbittorrent"                                # Readable App Title
-image="cr.hotio.dev/hotio/qbittorrent"     # Image and Tag
+image="ghcr.io/hotio/qbittorrent"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config
       - /mnt/media:/media"                     # Volumes

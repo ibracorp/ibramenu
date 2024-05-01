@@ -15,7 +15,7 @@ read -p "Enter you lan Network EX. (192.168.1.0/24)            : " IP
 # App Info
 app="qbittorrent-vpn"                                  # App Name
 title="qbittorrent-vpn"                                # Readable App Title
-image="cr.hotio.dev/hotio/qbittorrent"     # Image and Tag
+image="ghcr.io/hotio/qbittorrent"     # Image and Tag
 volumes="    volumes:
       - /opt/appdata/\${APP_NAME:?err}:/config
       - /mnt/media:/media"                     # Volumes
