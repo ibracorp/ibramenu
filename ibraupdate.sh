@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 ######################################################################
 # Title   : Beachhead - Initial Installer for IBRAMENU
@@ -7,15 +8,16 @@
 # Another fine product brought to you by IBRACORP™
 ######################################################################
 
-sudo bash -c "rm -R /opt/ibracorp/ibramenu/"
-sudo bash -c "git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git /opt/ibracorp/ibramenu"
-sudo find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+ifolder="/opt/ibracorp/ibramenu"
+sudo bash -c "rm -rf \"$ifolder\""
+sudo bash -c "git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git \"$ifolder\""
+sudo find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
 
 # update the custom docker netwrok use in all the containers
 update_docker_network() {
-  read -p "Enter the name of your custome docker network (ex. ibranet) : " customnetwork
+  read -r -p "Enter the name of your custom docker network (ex. ibranet) : " customnetwork
   sed -i "s/^dockernet=.*$/dockernet=$customnetwork/" /opt/ibracorp/ibramenu/.profile
-  docker network create $customnetwork >/dev/null 2>&1
+  docker network create "$customnetwork" >/dev/null 2>&1
 }
 
 update_docker_network

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 ######################################################################
 # Title   : Beachhead - Initial Installer for IBRAMENU
@@ -110,17 +111,16 @@ install () {
 }
 
 # Execute
-if [ -z $1 ]
+if [ -z "${1-}" ]
 then
   disclaimer
 fi
-if [ -n $2 ]
+if [ -n "${2-}" ]
 then
   mkdir -p /opt/ibracorp
-  echo $2 > /opt/ibracorp/token
+  echo "$2" > /opt/ibracorp/token
 fi
 checklist
-install $1
+install "${1-}"
 # cleanup the initial ibrainstall
 rm /opt/ibracorp/ibrainstall.sh
-
