@@ -9,6 +9,28 @@
 This README is a work in progress and awaiting other tasks before being completed.
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
+## Suggested Improvements & Roadmap
+
+Below is a curated list of improvements to make IBRAMENU best-in-class for what it does.
+These are grouped by impact and effort so contributors can pick quick wins or bigger initiatives.
+
+### Quick wins (high impact, low effort)
+- **Documentation refresh:** expand quickstart, troubleshooting, and upgrade notes, plus a versioned changelog.
+- **Menu search & filtering:** add a searchable menu with tags (e.g., Media, Networking, Security).
+- **Favorites & recent installs:** allow users to pin frequently used apps.
+- **Pre-flight checks:** validate Docker/Compose availability, OS compatibility, and permissions before install.
+
+### Medium effort improvements
+- **App manifests:** define a standard `manifest.yml` for each app to generate menus and docs consistently.
+- **Compose enhancements:** support health checks, resource limits, and optional security hardening profiles.
+- **Network management:** create the Docker network if missing and allow custom network selection per app.
+- **Debug mode & logs:** structured logging and a diagnostics command for easier support.
+
+### Long-term initiatives
+- **Release channels:** stable vs. beta channels, plus signed releases or checksums.
+- **Extensible plugin system:** allow community extensions without touching core scripts.
+- **CI quality gates:** ShellCheck, linting, and minimal integration tests for compose generation.
+
 ## Maintenance Status
 
 This project has not had code updates in several years. If you're relying on it in production,
