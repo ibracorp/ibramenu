@@ -9,6 +9,12 @@
 This README is a work in progress and awaiting other tasks before being completed.
 The actual documentation page below has all the information to help you get started with IBRAMENU.
 
+## Maintenance Status
+
+This project has not had code updates in several years. If you're relying on it in production,
+please consider pinning versions, reviewing install/update scripts, and validating dependencies
+against your current OS and Docker versions before deploying. Community contributions are welcome.
+
 ## HOW TO INSTALL
 
 ### As root user

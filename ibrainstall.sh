@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 ######################################################################
 # Title   : IBRAINSTALL Installer and Updater for IBRAMENU
@@ -9,17 +10,17 @@
 
 # Check for existing ibramenu folder and clean up if needed
 ifolder="/opt/ibracorp/ibramenu"
-if [ -d $ifolder ]; then
-  rm -r $ifolder
+if [ -d "$ifolder" ]; then
+  rm -rf "$ifolder"
 fi
-mkdir -p $ifolder
+mkdir -p "$ifolder"
 
 # Clone ibramenu
 apt update
 apt install sudo curl git ruby -y
 gem install mdless
-git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git $ifolder
- find $ifolder -type f -iname "*.sh" -exec chmod +x {} \;
+git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git "$ifolder"
+find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Add ibramenu as systemwide alias
 if ! grep -q ibramenu /etc/bash.bashrc
@@ -40,9 +41,9 @@ fi
 source /opt/ibracorp/ibramenu/ibrafunc.sh
 ibramotd
 ibralogo
-if [[ -n $1 ]]
+if [[ -n ${1-} ]]
 then
-  if [ $1 = all ]
+  if [ "$1" = all ]
   then
     cd "/opt/ibracorp/ibramenu/MenuOptions/Submenu Basic Install Steps/All Steps in One"
     "./All Steps in One.sh"
