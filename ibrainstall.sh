@@ -38,21 +38,27 @@ if [ "$skip_aliases" -ne 1 ]; then
   then
     insert_alias="alias ibramenu='sudo ${ifolder}/ibramenu.sh'"
     echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    set +u
     source /etc/bash.bashrc
+    set -u
   fi
   # Add ibraupdate as systemwide alias
   if ! grep -q ibraupdate /etc/bash.bashrc
   then
     insert_alias="alias ibraupdate='sudo ${ifolder}/ibraupdate.sh'"
     echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    set +u
     source /etc/bash.bashrc
+    set -u
   fi
   # Add ibrauninstall as systemwide alias
   if ! grep -q ibrauninstall /etc/bash.bashrc
   then
     insert_alias="alias ibrauninstall='sudo ${ifolder}/ibrauninstall.sh'"
     echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    set +u
     source /etc/bash.bashrc
+    set -u
   fi
 fi
 
