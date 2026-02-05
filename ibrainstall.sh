@@ -36,6 +36,13 @@ then
   echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
   source /etc/bash.bashrc
 fi
+# Add ibrauninstall as systemwide alias
+if ! grep -q ibrauninstall /etc/bash.bashrc
+then
+  insert_alias="alias ibrauninstall='sudo /opt/ibracorp/ibramenu/ibrauninstall.sh'"
+  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+  source /etc/bash.bashrc
+fi
 
 # Include ibrafunc for all the awesome functions
 source /opt/ibracorp/ibramenu/ibrafunc.sh
@@ -51,6 +58,7 @@ then
   else
     msgbox "Type 'ibramenu' to launch IBRAMENU"
     msgbox "Type 'ibraupdate' to update"
+    msgbox "Type 'ibrauninstall' to uninstall"
     msgbox "Please reboot after the first installation"
   fi
 fi

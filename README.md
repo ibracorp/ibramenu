@@ -55,6 +55,20 @@ sudo chmod +x i &&\
 sudo ./i
 ```
 
+## HOW TO UNINSTALL
+
+### As root user
+
+```bash
+/opt/ibracorp/ibramenu/ibrauninstall.sh
+```
+
+### As non root user
+
+```bash
+sudo /opt/ibracorp/ibramenu/ibrauninstall.sh
+```
+
 ### From a non supported OS like unraid
 
 This is not supported and a WIP. Run the following commands.
