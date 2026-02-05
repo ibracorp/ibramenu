@@ -27,7 +27,7 @@ mkdir -p "$ifolder"
 if [ "$skip_packages" -ne 1 ]; then
   apt update
   apt install sudo curl git ruby ruby-dev build-essential -y
-  gem install mdless
+  gem install mdless --no-document
 fi
 git clone -b "$clone_branch" --single-branch "$clone_source" "$ifolder"
 find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;

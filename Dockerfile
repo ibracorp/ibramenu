@@ -36,7 +36,7 @@ RUN \
   zsh \
   mc \
   sudo && \
-  gem install mdless 
+  gem install mdless --no-document 
 
 ## Install Docker
 RUN \
@@ -74,5 +74,4 @@ RUN \
   /tmp/* \
   /var/lib/apt/lists/* \
   /var/tmp/*
-
 

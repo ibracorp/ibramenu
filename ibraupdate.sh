@@ -12,7 +12,7 @@ ifolder="/opt/ibracorp/ibramenu"
 if ! command -v mdless >/dev/null 2>&1; then
   sudo apt update
   sudo apt install -y ruby ruby-dev build-essential
-  sudo gem install mdless
+  sudo gem install mdless --no-document
 fi
 sudo bash -c "rm -rf \"$ifolder\""
 sudo bash -c "git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git \"$ifolder\""
