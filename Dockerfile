@@ -65,7 +65,13 @@ RUN \
   touch /opt/ibracorp/IBRADISCLAIMER && \
   echo "**** Creating Inbramenu alias ****" && \
   echo IBRADISCLAIMER=accepted > /opt/ibracorp/IBRADISCLAIMER && \
-  echo "alias ibramenu='sudo /opt/ibracorp/ibramenu/ibramenu.sh'" | tee -a /etc/bash.bashrc > /dev/null && \
+  printf '%s\n' \
+    '# IBRAMENU aliases loaded by /etc/profile for login shells.' \
+    "alias ibramenu='sudo /opt/ibracorp/ibramenu/ibramenu.sh'" \
+    "alias ibraupdate='sudo /opt/ibracorp/ibramenu/ibraupdate.sh'" \
+    "alias ibrauninstall='sudo /opt/ibracorp/ibramenu/ibrauninstall.sh'" \
+    | tee /etc/profile.d/ibramenu.sh > /dev/null && \
+  chmod 0644 /etc/profile.d/ibramenu.sh && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \
@@ -74,4 +80,3 @@ RUN \
   /tmp/* \
   /var/lib/apt/lists/* \
   /var/tmp/*
-
