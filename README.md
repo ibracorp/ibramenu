@@ -51,20 +51,49 @@ contributions are welcome.
 ### As root user
 
 ```bash
-wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-chmod +x i &&\ 
+wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+chmod +x i &&\
 ./i
+```
+
+The `ibrainit.sh` script bootstraps the install (downloads dependencies and configures the
+application). Inspect it before running if you’d like, for example:
+
+```bash
+curl -L https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
+# or
+wget -qO- https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
 ```
 
 ### As non root user
 
 ``` bash
-sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-sudo chmod +x i &&\ 
+sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+sudo chmod +x i &&\
 sudo ./i
 ```
 
 ## Uninstall
+## Supported Platforms & Prerequisites
+
+### Supported OS targets
+- Ubuntu 22.04 LTS (recommended)
+- Ubuntu 20.04 LTS
+
+### Minimum container tooling
+- Docker Engine 24.0+
+- Docker Compose plugin 2.20+
+
+### Required tools
+- `mdless` (used by pre-flight checks)
+- `bash`, `curl`/`wget`, and standard GNU utilities available on Ubuntu
+
+### Non-supported platforms
+Platforms like Unraid are not officially supported. You may get IBRAMENU running via the
+container workflow below, but expect limited troubleshooting support and potential feature gaps
+around OS detection, permissions, and path assumptions.
+
+## HOW TO UNINSTALL
 
 ### As root user
 
