@@ -42,16 +42,25 @@ contributions are welcome.
 ### As root user
 
 ```bash
-wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-chmod +x i &&\ 
+wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+chmod +x i &&\
 ./i
+```
+
+The `ibrainit.sh` script bootstraps the install (downloads dependencies and configures the
+application). Inspect it before running if you’d like, for example:
+
+```bash
+curl -L https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
+# or
+wget -qO- https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
 ```
 
 ### As non root user
 
 ``` bash
-sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-sudo chmod +x i &&\ 
+sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+sudo chmod +x i &&\
 sudo ./i
 ```
 
