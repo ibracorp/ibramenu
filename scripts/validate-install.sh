@@ -10,6 +10,7 @@ trap cleanup EXIT
 
 export IBRAMENU_PREFIX="${temp_root}/ibracorp"
 export IBRAMENU_INSTALL_ROOT="${IBRAMENU_PREFIX}/ibramenu"
+export IBRAMENU_LAUNCHER_DIR="${temp_root}/launchers"
 export IBRAMENU_CLONE_SOURCE="${repo_root}"
 export IBRAMENU_CLONE_BRANCH="$(git -C "$repo_root" rev-parse --abbrev-ref HEAD)"
 export IBRAMENU_SKIP_PACKAGES=1

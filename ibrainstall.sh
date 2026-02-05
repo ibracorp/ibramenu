@@ -17,6 +17,7 @@ skip_packages="${IBRAMENU_SKIP_PACKAGES:-0}"
 skip_aliases="${IBRAMENU_SKIP_ALIASES:-0}"
 skip_motd="${IBRAMENU_SKIP_MOTD:-0}"
 profile_alias_file="/etc/profile.d/ibramenu.sh"
+launcher_dir="${IBRAMENU_LAUNCHER_DIR:-/usr/local/bin}"
 
 # Check for existing ibramenu folder and clean up if needed
 if [ -d "$ifolder" ]; then
