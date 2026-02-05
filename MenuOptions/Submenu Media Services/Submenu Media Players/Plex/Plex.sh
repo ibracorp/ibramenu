@@ -55,16 +55,11 @@ EOF
 # List Links
 local_appfinalization () {
   porte="32400/web"
-  check_ibradashy
   ibralogo
   msgbox "All Done! Here is the link to $title:"
   echo
   ip=$(hostname -I | awk '{print $1}')
   echo "$title: http://$ip:32400/web"
-  ibradashy
-  msgbox "You can also find $title on your IBRACORP Dashy website:"
-  echo "http://$ip:8086"
-  echo
 }
 
 # Execute
