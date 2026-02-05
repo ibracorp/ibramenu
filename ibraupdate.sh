@@ -9,6 +9,11 @@ set -euo pipefail
 ######################################################################
 
 ifolder="/opt/ibracorp/ibramenu"
+if ! command -v mdless >/dev/null 2>&1; then
+  apt update
+  apt install -y ruby
+  gem install mdless
+fi
 sudo bash -c "rm -rf \"$ifolder\""
 sudo bash -c "git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git \"$ifolder\""
 sudo find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
