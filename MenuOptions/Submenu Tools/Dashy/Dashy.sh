@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################
 # Title   : Install Dashy
-# By      : DiscDuck, Taos15
+# By      : Sycotix, DiscDuck, Taos15
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################

@@ -2,7 +2,7 @@
 
 ######################################################################
 # Title   : Update and Upgrade
-# By      : DiscDuck
+# By      : Sycotix, DiscDuck
 # License : General Public License GPL-3.0-or-later
 # Another fine product brought to you by IBRACORP™
 ######################################################################
