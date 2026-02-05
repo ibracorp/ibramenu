@@ -12,6 +12,10 @@
 source /opt/ibracorp/ibramenu/.profile
 source /opt/appdata/.traefik.env
 
+if [ -f /opt/appdata/.ibramenu.env ]; then
+  source /opt/appdata/.ibramenu.env
+fi
+
 if [[ -n "${IBRAMENU_DOCKER_NETWORK:-}" ]]; then
   dockernet="$IBRAMENU_DOCKER_NETWORK"
 fi
@@ -171,6 +175,12 @@ environment_check() {
     echo "DOCKER_MODS=ghcr.io/gilbn/theme.park:\${TP_APP}" >"/opt/appdata/.themepark.env"
     echo "TP_THEME=plex" >>"/opt/appdata/.themepark.env"
   fi
+  # ibramenu settings
+  if [ ! -f "/opt/appdata/.ibramenu.env" ]; then
+    tee <<-EOF >"/opt/appdata/.ibramenu.env"
+IBRAMENU_DASHY_ENABLE=1
+EOF
+  fi
   if ! docker network inspect "$dockernet" >/dev/null 2>&1; then
     msgbox "Creating Docker network: $dockernet"
     docker network create "$dockernet" >/dev/null
@@ -310,16 +320,18 @@ EOF
 
 # List Links
 appfinalization() {
-  check_ibradashy
   ibralogo
   msgbox "All Done! Here is the link to $title:"
   echo
   ip=$(hostname -I | awk '{print $1}')
   echo "$title: http://$ip:$porte/"
-  ibradashy
-  msgbox "You can also find $title on your IBRACORP Dashy website:"
-  echo "http://$ip:8086"
-  echo
+  if ibradashy_enabled; then
+    check_ibradashy
+    ibradashy
+    msgbox "You can also find $title on your IBRACORP Dashy website:"
+    echo "http://$ip:8086"
+    echo
+  fi
 }
 
 # App Complete
@@ -330,7 +342,19 @@ app() {
 }
 
 # IBRACORP Dashy
+ibradashy_enabled() {
+  case "${IBRAMENU_DASHY_ENABLE:-1}" in
+  0 | [Ff][Aa][Ll][Ss][Ee] | [Nn][Oo])
+    return 1
+    ;;
+  esac
+  return 0
+}
+
 ibradashy() {
+  if ! ibradashy_enabled; then
+    return
+  fi
   if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" >/dev/null 2>&1; then
     position=$(expr $(grep -n "name: IBRAMENU" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 3)
     sed -i "$position i \      - title: $title\\
@@ -343,6 +367,9 @@ ibradashy() {
 
 # Check IBRACORP Dashy
 check_ibradashy() {
+  if ! ibradashy_enabled; then
+    return
+  fi
   if [ ! -d "/opt/appdata/ibradashy" ]; then
     mkdir -p "/opt/appdata/ibradashy"
   fi
