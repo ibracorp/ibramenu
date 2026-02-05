@@ -17,7 +17,7 @@ mkdir -p "$ifolder"
 
 # Clone ibramenu
 apt update
-apt install sudo curl git ruby -y
+apt install sudo curl git ruby ruby-dev build-essential -y
 gem install mdless
 git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git "$ifolder"
 find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
