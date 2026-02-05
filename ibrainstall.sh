@@ -16,6 +16,7 @@ clone_branch="${IBRAMENU_CLONE_BRANCH:-main}"
 skip_packages="${IBRAMENU_SKIP_PACKAGES:-0}"
 skip_aliases="${IBRAMENU_SKIP_ALIASES:-0}"
 skip_motd="${IBRAMENU_SKIP_MOTD:-0}"
+profile_alias_file="/etc/profile.d/ibramenu.sh"
 
 # Check for existing ibramenu folder and clean up if needed
 if [ -d "$ifolder" ]; then
@@ -34,32 +35,13 @@ find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Add ibramenu as systemwide alias
 if [ "$skip_aliases" -ne 1 ]; then
-  if ! grep -q ibramenu /etc/bash.bashrc
-  then
-    insert_alias="alias ibramenu='sudo ${ifolder}/ibramenu.sh'"
-    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-    set +u
-    source /etc/bash.bashrc
-    set -u
-  fi
-  # Add ibraupdate as systemwide alias
-  if ! grep -q ibraupdate /etc/bash.bashrc
-  then
-    insert_alias="alias ibraupdate='sudo ${ifolder}/ibraupdate.sh'"
-    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-    set +u
-    source /etc/bash.bashrc
-    set -u
-  fi
-  # Add ibrauninstall as systemwide alias
-  if ! grep -q ibrauninstall /etc/bash.bashrc
-  then
-    insert_alias="alias ibrauninstall='sudo ${ifolder}/ibrauninstall.sh'"
-    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-    set +u
-    source /etc/bash.bashrc
-    set -u
-  fi
+  sudo tee "$profile_alias_file" > /dev/null <<EOF
+# IBRAMENU aliases loaded by /etc/profile for login shells.
+alias ibramenu='sudo ${ifolder}/ibramenu.sh'
+alias ibraupdate='sudo ${ifolder}/ibraupdate.sh'
+alias ibrauninstall='sudo ${ifolder}/ibrauninstall.sh'
+EOF
+  sudo chmod 0644 "$profile_alias_file"
 fi
 
 # Include ibrafunc for all the awesome functions
