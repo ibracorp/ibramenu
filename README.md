@@ -6,8 +6,8 @@
 [![Ubuntu](https://img.shields.io/badge/Works%20best%20with-Ubuntu-E95420?style=plastic&logo=ubuntu&logoColor=white)](https://ubuntu.com)
 [![IBRADOCS](https://img.shields.io/badge/IBRA-Docs-blue?style=plastic)](https://docs.ibracorp.io)
 
-This README is a work in progress and awaiting other tasks before being completed.
-The actual documentation page below has all the information to help you get started with IBRAMENU.
+This README is actively maintained alongside the documentation. You can also reference the
+documentation page below for deeper guides and walkthroughs.
 
 ## Suggested Improvements & Roadmap
 
@@ -33,9 +33,9 @@ These are grouped by impact and effort so contributors can pick quick wins or bi
 
 ## Maintenance Status
 
-This project has not had code updates in several years. If you're relying on it in production,
-please consider pinning versions, reviewing install/update scripts, and validating dependencies
-against your current OS and Docker versions before deploying. Community contributions are welcome.
+Development has begun again, with ongoing updates focused on reliability and usability. If you're
+running this in production, keep pinning versions and review updates as they land. Community
+contributions are welcome.
 
 ## HOW TO INSTALL
 
@@ -72,6 +72,21 @@ To generate the docker compose file for your apps you need to run ibramenu from 
 ```bash
 docker run -it ibramenu /bin/bash
 ```
+
+### Pre-flight checks
+
+On launch, IBRAMENU validates that Docker, the Docker Compose plugin, and `mdless` are available,
+and that the Docker daemon is accessible. Fix any missing dependencies before continuing.
+
+### Debug mode
+
+To enable additional logging, set `IBRAMENU_DEBUG=1`. Logs are written to
+`/opt/appdata/ibramenu/ibramenu.log`.
+
+### Docker network override
+
+By default IBRAMENU uses the network defined in `.profile` (`ibranet`). You can override this by
+exporting `IBRAMENU_DOCKER_NETWORK` before launching the menu.
 
 ### Compose File Example
 

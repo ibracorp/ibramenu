@@ -11,6 +11,26 @@
 # profile file
 source /opt/ibracorp/ibramenu/.profile
 source /opt/appdata/.traefik.env
+
+if [[ -n "${IBRAMENU_DOCKER_NETWORK:-}" ]]; then
+  dockernet="$IBRAMENU_DOCKER_NETWORK"
+fi
+
+log_debug() {
+  if [[ -n "${IBRAMENU_DEBUG:-}" ]]; then
+    mkdir -p /opt/appdata/ibramenu
+    echo "$(date -Iseconds) [DEBUG] $*" >>/opt/appdata/ibramenu/ibramenu.log
+  fi
+}
+
+require_command() {
+  local command_name=$1
+  if ! command -v "$command_name" >/dev/null 2>&1; then
+    msgbox "Missing dependency: $command_name"
+    echo "Please install '$command_name' and re-run ibramenu."
+    exit 1
+  fi
+}
 # message box
 msgbox() {
   # function expects a message and optional parameters
@@ -117,6 +137,18 @@ EOF
 }
 
 environment_check() {
+  require_command docker
+  require_command mdless
+  if ! docker compose version >/dev/null 2>&1; then
+    msgbox "Missing dependency: docker compose"
+    echo "Please install the Docker Compose plugin and re-run ibramenu."
+    exit 1
+  fi
+  if ! docker info >/dev/null 2>&1; then
+    msgbox "Docker daemon not accessible"
+    echo "Start the Docker daemon and ensure your user has Docker permissions."
+    exit 1
+  fi
   # Check for environment files or otherwise create them with defaults
   if [ ! -d "/opt/appdata" ]; then
     mkdir -p /opt/appdata
@@ -139,6 +171,11 @@ environment_check() {
     echo "DOCKER_MODS=ghcr.io/gilbn/theme.park:\${TP_APP}" >"/opt/appdata/.themepark.env"
     echo "TP_THEME=plex" >>"/opt/appdata/.themepark.env"
   fi
+  if ! docker network inspect "$dockernet" >/dev/null 2>&1; then
+    msgbox "Creating Docker network: $dockernet"
+    docker network create "$dockernet" >/dev/null
+  fi
+  log_debug "Environment check complete. Network: $dockernet"
 }
 
 # launch docker compose container
@@ -173,7 +210,7 @@ checkupdate() {
   version=$(cat "/opt/ibracorp/ibramenu/version")
   current=$(curl -fsSL --max-time 5 https://raw.githubusercontent.com/ibracorp/ibramenu/main/version || true)
   if [[ -n "$current" && "$version" != "$current" ]]; then
-    msgbox "You IBRAMENU is not up-to-date. Use 'ibraupdate' to update."
+    msgbox "Your IBRAMENU is not up-to-date. Use 'ibraupdate' to update."
   fi
 }
 
