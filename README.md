@@ -9,6 +9,15 @@
 This README is actively maintained alongside the documentation. You can also reference the
 documentation page below for deeper guides and walkthroughs.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Uninstall](#uninstall)
+- [Docker Usage](#docker-usage)
+- [Debug Mode](#debug-mode)
+- [Network Override](#network-override)
+- [Support](#support)
+
 ## Suggested Improvements & Roadmap
 
 Below is a curated list of improvements to make IBRAMENU best-in-class for what it does.
@@ -37,23 +46,52 @@ Development has begun again, with ongoing updates focused on reliability and usa
 running this in production, keep pinning versions and review updates as they land. Community
 contributions are welcome.
 
-## HOW TO INSTALL
+## Installation
 
 ### As root user
 
 ```bash
-wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-chmod +x i &&\ 
+wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+chmod +x i &&\
 ./i
+```
+
+The `ibrainit.sh` script bootstraps the install (downloads dependencies and configures the
+application). Inspect it before running if you’d like, for example:
+
+```bash
+curl -L https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
+# or
+wget -qO- https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh | less
 ```
 
 ### As non root user
 
 ``` bash
-sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\ 
-sudo chmod +x i &&\ 
+sudo wget -qO ./i https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainit.sh &&\
+sudo chmod +x i &&\
 sudo ./i
 ```
+
+## Uninstall
+## Supported Platforms & Prerequisites
+
+### Supported OS targets
+- Ubuntu 22.04 LTS (recommended)
+- Ubuntu 20.04 LTS
+
+### Minimum container tooling
+- Docker Engine 24.0+
+- Docker Compose plugin 2.20+
+
+### Required tools
+- `mdless` (used by pre-flight checks)
+- `bash`, `curl`/`wget`, and standard GNU utilities available on Ubuntu
+
+### Non-supported platforms
+Platforms like Unraid are not officially supported. You may get IBRAMENU running via the
+container workflow below, but expect limited troubleshooting support and potential feature gaps
+around OS detection, permissions, and path assumptions.
 
 ## HOW TO UNINSTALL
 
@@ -68,6 +106,8 @@ sudo ./i
 ```bash
 sudo /opt/ibracorp/ibramenu/ibrauninstall.sh
 ```
+
+## Docker Usage
 
 ### From a non supported OS like unraid
 
@@ -91,16 +131,6 @@ docker run -it ibramenu /bin/bash
 
 On launch, IBRAMENU validates that Docker, the Docker Compose plugin, and `mdless` are available,
 and that the Docker daemon is accessible. Fix any missing dependencies before continuing.
-
-### Debug mode
-
-To enable additional logging, set `IBRAMENU_DEBUG=1`. Logs are written to
-`/opt/appdata/ibramenu/ibramenu.log`.
-
-### Docker network override
-
-By default IBRAMENU uses the network defined in `.profile` (`ibranet`). You can override this by
-exporting `IBRAMENU_DOCKER_NETWORK` before launching the menu.
 
 ### Compose File Example
 
@@ -133,8 +163,17 @@ docker exec -it ibramenu bash
 ibramenu
 ```
 
+## Debug Mode
 
+To enable additional logging, set `IBRAMENU_DEBUG=1`. Logs are written to
+`/opt/appdata/ibramenu/ibramenu.log`.
 
+## Network Override
+
+By default IBRAMENU uses the network defined in `.profile` (`ibranet`). You can override this by
+exporting `IBRAMENU_DOCKER_NETWORK` before launching the menu.
+
+## Support
 
 [![Install](https://img.shields.io/badge/Install-IBRAMENU-brightgreen?style=plastic)](https://docs.ibracorp.io/ibramenu)
 Make requests here: <https://feedback.ibracorp.io/ibramenu>
