@@ -55,6 +55,25 @@ sudo chmod +x i &&\
 sudo ./i
 ```
 
+## Supported Platforms & Prerequisites
+
+### Supported OS targets
+- Ubuntu 22.04 LTS (recommended)
+- Ubuntu 20.04 LTS
+
+### Minimum container tooling
+- Docker Engine 24.0+
+- Docker Compose plugin 2.20+
+
+### Required tools
+- `mdless` (used by pre-flight checks)
+- `bash`, `curl`/`wget`, and standard GNU utilities available on Ubuntu
+
+### Non-supported platforms
+Platforms like Unraid are not officially supported. You may get IBRAMENU running via the
+container workflow below, but expect limited troubleshooting support and potential feature gaps
+around OS detection, permissions, and path assumptions.
+
 ## HOW TO UNINSTALL
 
 ### As root user
