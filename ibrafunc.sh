@@ -12,10 +12,6 @@
 source /opt/ibracorp/ibramenu/.profile
 source /opt/appdata/.traefik.env
 
-if [ -f /opt/appdata/.ibramenu.env ]; then
-  source /opt/appdata/.ibramenu.env
-fi
-
 if [[ -n "${IBRAMENU_DOCKER_NETWORK:-}" ]]; then
   dockernet="$IBRAMENU_DOCKER_NETWORK"
 fi
@@ -175,12 +171,6 @@ environment_check() {
     echo "DOCKER_MODS=ghcr.io/gilbn/theme.park:\${TP_APP}" >"/opt/appdata/.themepark.env"
     echo "TP_THEME=plex" >>"/opt/appdata/.themepark.env"
   fi
-  # ibramenu settings
-  if [ ! -f "/opt/appdata/.ibramenu.env" ]; then
-    tee <<-EOF >"/opt/appdata/.ibramenu.env"
-IBRAMENU_DASHY_ENABLE=1
-EOF
-  fi
   if ! docker network inspect "$dockernet" >/dev/null 2>&1; then
     msgbox "Creating Docker network: $dockernet"
     docker network create "$dockernet" >/dev/null
@@ -325,13 +315,6 @@ appfinalization() {
   echo
   ip=$(hostname -I | awk '{print $1}')
   echo "$title: http://$ip:$porte/"
-  if ibradashy_enabled; then
-    check_ibradashy
-    ibradashy
-    msgbox "You can also find $title on your IBRACORP Dashy website:"
-    echo "http://$ip:8086"
-    echo
-  fi
 }
 
 # App Complete
@@ -339,138 +322,4 @@ app() {
   appgreetings
   appcreate
   appfinalization
-}
-
-# IBRACORP Dashy
-ibradashy_enabled() {
-  case "${IBRAMENU_DASHY_ENABLE:-1}" in
-  0 | [Ff][Aa][Ll][Ss][Ee] | [Nn][Oo])
-    return 1
-    ;;
-  esac
-  return 0
-}
-
-ibradashy() {
-  if ! ibradashy_enabled; then
-    return
-  fi
-  if ! grep "^      - title: $title$" "/opt/appdata/ibradashy/conf.yml" >/dev/null 2>&1; then
-    position=$(expr $(grep -n "name: IBRAMENU" /opt/appdata/ibradashy/conf.yml | grep -Eo '^[^:]+') + 3)
-    sed -i "$position i \      - title: $title\\
-        description: Click to launch $title\\
-        icon: favicon\\
-        url: http://$ip:$porte" /opt/appdata/ibradashy/conf.yml
-    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate >/dev/null 2>&1
-  fi
-}
-
-# Check IBRACORP Dashy
-check_ibradashy() {
-  if ! ibradashy_enabled; then
-    return
-  fi
-  if [ ! -d "/opt/appdata/ibradashy" ]; then
-    mkdir -p "/opt/appdata/ibradashy"
-  fi
-  if [ ! -f "/opt/appdata/ibradashy/.env" ]; then
-    tee <<-EOF >"/opt/appdata/ibradashy/.env"
-APP_NAME=ibradashy
-IMAGE=lissy93/dashy:latest
-TP_APP=
-PORTE=8086
-PORTI=80
-EOF
-  fi
-  if [ ! -f "/opt/appdata/ibradashy/conf.yml" ]; then
-    tee <<-EOF >"/opt/appdata/ibradashy/conf.yml"
-pageInfo:
-  title: IBRACORP
-sections:
-  - name: IBRAMENU
-    icon: far fa-rocket
-    items:
-# IBRAMENU added
-    displayData:
-      sortBy: alphabetical
-      rows: 1
-      cols: 1
-      collapsed: false
-      hideForGuests: false
-  - name: Information
-    displayData:
-      sortBy: alphabetical
-      rows: 1
-      cols: 1
-      collapsed: false
-      hideForGuests: false
-    widgets:
-      - type: image
-        options:
-          imagePath: https://ibramenu.io/wp-content/uploads/2022/08/ibramenu_concept._logo_crop-300x140.png
-    items:
-      - title: IBRAMENU
-        description: Website
-        icon: https://ibracorp.io/favicon.ico
-        url: https://ibramenu.io
-      - title: IBRACORP
-        description: Main Website
-        icon: favicon
-        url: https://ibracorp.io
-      - title: GitHub
-        description: IBRAMENU on GitHub
-        icon: favicon
-        url: https://github.com/ibracorp/ibramenu
-      - title: Feedback
-        description: IBRAMENU Feedback and Voting
-        icon: https://ibracorp.io/favicon.ico
-        url: https://feedback.ibracorp.io/ibramenu
-  - name: Services
-    displayData:
-      sortBy: default
-      rows: 1
-      cols: 1
-      collapsed: false
-      hideForGuests: false
-    widgets:
-      - type: iframe
-        options:
-          url: https://i.ibracorp.io/services
-          frameHeight: 440
-appConfig:
-  theme: Oblivion
-  language: en
-  layout: auto
-  iconSize: large
-EOF
-  fi
-  if [ ! -f "/opt/appdata/ibradashy/compose.yaml" ]; then
-    tee <<-EOF >"/opt/appdata/ibradashy/compose.yaml"
-services:
-  service-name:
-    image: \${IMAGE:?err}
-    container_name: \${APP_NAME:?err}
-    env_file:
-      - /opt/appdata/.id.env
-      - /opt/appdata/.timezone.env
-    volumes:
-      - ./conf.yml:/app/public/conf.yml
-    ports:
-      - \${PORTE:?err}:\${PORTI:?err}
-    networks:
-      - $dockernet
-    restart: unless-stopped
-    security_opt:
-      - apparmor:unconfined
-
-networks:
-  $dockernet:
-    driver: bridge
-    external: true
-EOF
-  fi
-  if [ ! $(docker ps | grep ibradashy) ]; then
-    msgbox "Installing/Updating IBRADASHY"
-    docker compose -f /opt/appdata/ibradashy/compose.yaml up -d --force-recreate >/dev/null 2>&1
-  fi
 }
