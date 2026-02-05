@@ -13,6 +13,7 @@ documentation page below for deeper guides and walkthroughs.
 
 - [Installation](#installation)
 - [Uninstall](#uninstall)
+- [Supported Platforms & Prerequisites](#supported-platforms--prerequisites)
 - [Docker Usage](#docker-usage)
 - [Debug Mode](#debug-mode)
 - [Network Override](#network-override)
@@ -73,7 +74,6 @@ sudo chmod +x i &&\
 sudo ./i
 ```
 
-## Uninstall
 ## Supported Platforms & Prerequisites
 
 ### Supported OS targets
@@ -93,7 +93,7 @@ Platforms like Unraid are not officially supported. You may get IBRAMENU running
 container workflow below, but expect limited troubleshooting support and potential feature gaps
 around OS detection, permissions, and path assumptions.
 
-## HOW TO UNINSTALL
+## Uninstall
 
 ### As root user
 
@@ -109,7 +109,7 @@ sudo /opt/ibracorp/ibramenu/ibrauninstall.sh
 
 ## Docker Usage
 
-### From a non supported OS like unraid
+### From a non-supported OS like Unraid
 
 This is not supported and a WIP. Run the following commands.
 
