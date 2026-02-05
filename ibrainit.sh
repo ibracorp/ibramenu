@@ -36,7 +36,9 @@ Please take a moment and read our IBRACORP Disclaimer:
 https://docs.ibracorp.io/ibracorp/
 
 EOF
-  read -p "Press Enter to continue"
+  if [ "${IBRAMENU_NONINTERACTIVE:-0}" -ne 1 ]; then
+    read -p "Press Enter to continue"
+  fi
 }
 
 # Checklist
@@ -82,14 +84,22 @@ EOF
     "Debian GNU/Linux 10")
       echo "$distribution is considered experimental but will mostly work"
       echo "You will be asked if you want to switch the debian repositories from 'stable' to 'oldstable'. More info can be found here: https://wiki.debian.org/DebianOldStable"
-      read -p "Press Enter to continue"
+      if [ "${IBRAMENU_NONINTERACTIVE:-0}" -ne 1 ]; then
+        read -p "Press Enter to continue"
+      fi
       ;;
     "Debian GNU/Linux 11")
       echo "$distribution is considered experimental but will mostly work"
-      read -p "Press Enter to continue"
+      if [ "${IBRAMENU_NONINTERACTIVE:-0}" -ne 1 ]; then
+        read -p "Press Enter to continue"
+      fi
       ;;
     *)
-      read -p "$distribution has not been tested, would you like to continue? (y/n) " accept
+      if [ "${IBRAMENU_NONINTERACTIVE:-0}" -eq 1 ]; then
+        accept="y"
+      else
+        read -p "$distribution has not been tested, would you like to continue? (y/n) " accept
+      fi
       case "$accept" in
         [yY])
           ;;
@@ -104,16 +114,25 @@ EOF
 
 # Launch IBRAINSTALL
 install () {
-  mkdir -p /opt/ibracorp
-  wget -qO /opt/ibracorp/ibrainstall.sh https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh
-  chmod +x /opt/ibracorp/ibrainstall.sh
-  /opt/ibracorp/ibrainstall.sh $1
+  local install_root="/opt/ibracorp"
+  local installer_path="${install_root}/ibrainstall.sh"
+  local installer_url="${IBRAMENU_INSTALLER_URL:-https://raw.githubusercontent.com/ibracorp/ibramenu/main/ibrainstall.sh}"
+  mkdir -p "$install_root"
+  if [ -n "${IBRAMENU_INSTALLER_PATH-}" ]; then
+    cp "$IBRAMENU_INSTALLER_PATH" "$installer_path"
+  else
+    wget -qO "$installer_path" "$installer_url"
+  fi
+  chmod +x "$installer_path"
+  "$installer_path" $1
 }
 
 # Execute
 if [ -z "${1-}" ]
 then
-  disclaimer
+  if [ "${IBRAMENU_NONINTERACTIVE:-0}" -ne 1 ]; then
+    disclaimer
+  fi
 fi
 if [ -n "${2-}" ]
 then

@@ -8,46 +8,60 @@ set -euo pipefail
 # Another fine product brought to you by IBRACORP™
 ######################################################################
 
+# Install configuration (overridable for testing)
+prefix_dir="${IBRAMENU_PREFIX:-/opt/ibracorp}"
+ifolder="${IBRAMENU_INSTALL_ROOT:-${prefix_dir}/ibramenu}"
+clone_source="${IBRAMENU_CLONE_SOURCE:-https://github.com/ibracorp/ibramenu.git}"
+clone_branch="${IBRAMENU_CLONE_BRANCH:-main}"
+skip_packages="${IBRAMENU_SKIP_PACKAGES:-0}"
+skip_aliases="${IBRAMENU_SKIP_ALIASES:-0}"
+skip_motd="${IBRAMENU_SKIP_MOTD:-0}"
+
 # Check for existing ibramenu folder and clean up if needed
-ifolder="/opt/ibracorp/ibramenu"
 if [ -d "$ifolder" ]; then
   rm -rf "$ifolder"
 fi
 mkdir -p "$ifolder"
 
 # Clone ibramenu
-apt update
-apt install sudo curl git ruby ruby-dev build-essential -y
-gem install mdless
-git clone -b main --single-branch https://github.com/ibracorp/ibramenu.git "$ifolder"
+if [ "$skip_packages" -ne 1 ]; then
+  apt update
+  apt install sudo curl git ruby ruby-dev build-essential -y
+  gem install mdless
+fi
+git clone -b "$clone_branch" --single-branch "$clone_source" "$ifolder"
 find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Add ibramenu as systemwide alias
-if ! grep -q ibramenu /etc/bash.bashrc
-then
-  insert_alias="alias ibramenu='sudo /opt/ibracorp/ibramenu/ibramenu.sh'"
-  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-  source /etc/bash.bashrc
-fi
-# Add ibraupdate as systemwide alias
-if ! grep -q ibraupdate /etc/bash.bashrc
-then
-  insert_alias="alias ibraupdate='sudo /opt/ibracorp/ibramenu/ibraupdate.sh'"
-  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-  source /etc/bash.bashrc
-fi
-# Add ibrauninstall as systemwide alias
-if ! grep -q ibrauninstall /etc/bash.bashrc
-then
-  insert_alias="alias ibrauninstall='sudo /opt/ibracorp/ibramenu/ibrauninstall.sh'"
-  echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
-  source /etc/bash.bashrc
+if [ "$skip_aliases" -ne 1 ]; then
+  if ! grep -q ibramenu /etc/bash.bashrc
+  then
+    insert_alias="alias ibramenu='sudo ${ifolder}/ibramenu.sh'"
+    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    source /etc/bash.bashrc
+  fi
+  # Add ibraupdate as systemwide alias
+  if ! grep -q ibraupdate /etc/bash.bashrc
+  then
+    insert_alias="alias ibraupdate='sudo ${ifolder}/ibraupdate.sh'"
+    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    source /etc/bash.bashrc
+  fi
+  # Add ibrauninstall as systemwide alias
+  if ! grep -q ibrauninstall /etc/bash.bashrc
+  then
+    insert_alias="alias ibrauninstall='sudo ${ifolder}/ibrauninstall.sh'"
+    echo $insert_alias | sudo tee -a /etc/bash.bashrc > /dev/null
+    source /etc/bash.bashrc
+  fi
 fi
 
 # Include ibrafunc for all the awesome functions
-source /opt/ibracorp/ibramenu/ibrafunc.sh
-ibramotd
-ibralogo
+if [ "$skip_motd" -ne 1 ]; then
+  source "${ifolder}/ibrafunc.sh"
+  ibramotd
+  ibralogo
+fi
 if [[ -n ${1-} ]]
 then
   if [ "$1" = all ]
