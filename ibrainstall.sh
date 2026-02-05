@@ -33,6 +33,23 @@ fi
 git clone -b "$clone_branch" --single-branch "$clone_source" "$ifolder"
 find "$ifolder" -type f -iname "*.sh" -exec chmod +x {} \;
 
+# Install launchers into a directory on PATH
+install_launcher() {
+  local launcher_name="$1"
+  local target_script="$2"
+
+  mkdir -p "$launcher_dir"
+  cat <<EOF | tee "${launcher_dir}/${launcher_name}" > /dev/null
+#!/bin/bash
+exec sudo "${target_script}" "\$@"
+EOF
+  chmod +x "${launcher_dir}/${launcher_name}"
+}
+
+install_launcher "ibramenu" "${ifolder}/ibramenu.sh"
+install_launcher "ibraupdate" "${ifolder}/ibraupdate.sh"
+install_launcher "ibrauninstall" "${ifolder}/ibrauninstall.sh"
+
 # Add ibramenu as systemwide alias
 if [ "$skip_aliases" -ne 1 ]; then
   sudo tee "$profile_alias_file" > /dev/null <<EOF
